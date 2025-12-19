@@ -486,7 +486,17 @@
         align-items: flex-start;
       }
     }
+    @keyframes logo-gold-pulse {
+  0%   { color: #d4af37; text-shadow: 0 0 4px rgba(212,175,55,0.5); }
+  50%  { color: #ffe27a; text-shadow: 0 0 10px rgba(255,226,122,0.9); }
+  100% { color: #d4af37; text-shadow: 0 0 4px rgba(212,175,55,0.5); }
+}
+
+.logo-glow {
+  animation: logo-gold-pulse 2.4s ease-in-out infinite;
+}
   </style>
+  
 </head>
 <body>
   <header>
@@ -498,8 +508,6 @@
       <div>
         <
           
-          { c
-}
           <small>
   <a href="https://www.google.com/maps/search/?api=1&query=SALON+GOLDEN+FINGERS+Mariestadsv%C3%A4gen+86+549+56+Sk%C3%B6vde"
      target="_blank" rel="noopener">
