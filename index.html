@@ -486,11 +486,28 @@
         align-items: flex-start;
       }
     }
-    @keyframes logo-gold-pulse {
-  0%   { color: #d4af37; text-shadow: 0 0 4px rgba(212,175,55,0.5); }
-  33%  { color: #ffb347; text-shadow: 0 0 10px rgba(255,179,71,0.9); }
-  66%  { color: #ffe27a; text-shadow: 0 0 12px rgba(255,226,122,1); }
-  100% { color: #d4af37; text-shadow: 0 0 4px rgba(212,175,55,0.5); }
+    .logo-glow {
+  background: linear-gradient(
+    90deg,
+    #ff0000,
+    #ff7f00,
+    #ffff00,
+    #00ff00,
+    #00ffff,
+    #0000ff,
+    #ff00ff,
+    #ff0000
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: logo-rainbow 4s linear infinite;
+}
+
+@keyframes logo-rainbow {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 400% 50%; }
+}
 }
 
 .logo-glow {
