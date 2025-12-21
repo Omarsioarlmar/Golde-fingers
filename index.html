@@ -2,364 +2,426 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
-  <title>Golden Fingers Skövde - Boka Nu!</title>
+  <title>Golden Fingers Skövde - Boka Tid</title>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
     body {
-      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+      background: linear-gradient(45deg,#ff6b6b,#4ecdc4,#45b7d1,#96ceb4);
+      background-size: 300% 300%;
+      animation: bgMove 5s ease infinite;
       font-family: Arial, sans-serif;
-      animation: gradientShift 5s ease infinite;
       margin: 0;
       padding: 20px;
     }
-    @keyframes gradientShift {
+    @keyframes bgMove {
       0%,100%{background-position:0% 50%}
       50%{background-position:100% 50%}
     }
-    .container { max-width: 1200px; margin: auto; text-align: center; }
+    .container { max-width: 1200px; margin: 0 auto; text-align: center; }
     h1 {
-      font-size: 3.5em;
-      background: linear-gradient(45deg, #ffd700, #ffa500, #ffffff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: glow 2s ease-in-out infinite alternate;
-      margin-bottom: 10px;
+      font-size: 3.2em;
+      margin-bottom: 5px;
+      background: linear-gradient(45deg,#ffd700,#ffa500,#ffffff);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow: 0 0 25px rgba(0,0,0,0.3);
     }
-    @keyframes glow {
-      from { text-shadow: 0 0 20px #ffd700; }
-      to   { text-shadow: 0 0 35px #ffa500; }
-    }
+    h2 { color:#fff; margin-top:5px; }
     .btn {
-      background: linear-gradient(45deg, #ffd700, #ffa500);
-      padding: 15px 35px;
+      background: linear-gradient(45deg,#ffd700,#ffa500);
       border: none;
       border-radius: 40px;
-      font-size: 18px;
+      padding: 12px 28px;
+      font-size: 16px;
       cursor: pointer;
-      margin: 10px;
-      animation: pulse 2s infinite;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      color:#000;
+      margin: 8px;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.3);
+      transition: transform .2s;
     }
-    @keyframes pulse {
-      0%,100%{transform:scale(1);}
-      50%{transform:scale(1.05);}
-    }
-    .slot {
-      padding: 18px 24px;
-      margin: 10px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 20px;
-      font-weight: bold;
-      transition: all 0.3s;
-      display: inline-block;
-      min-width: 110px;
-    }
-    .available {
-      background: linear-gradient(45deg, #4caf50, #45a049);
-      color: #fff;
-      box-shadow: 0 10px 20px rgba(76,175,80,0.5);
-    }
-    .available:hover { transform: scale(1.08); }
-    .booked {
-      background: linear-gradient(45deg, #f44336, #da190b);
-      color: #fff;
-      box-shadow: 0 10px 20px rgba(244,67,54,0.5);
-    }
-    #bookings {
-      background: rgba(255,255,255,0.95);
-      padding: 25px;
-      border-radius: 22px;
-      margin: 25px auto;
-      max-width: 800px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
-      text-align: left;
-    }
-    #bookingForm {
-      background: linear-gradient(135deg, #ffffff, #f5f5f5);
-      padding: 30px;
-      border-radius: 22px;
-      max-width: 450px;
-      margin: 25px auto;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-      display: none;
-      text-align: left;
-    }
-    input, select {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 12px;
-      border: 2px solid #ddd;
-      font-size: 15px;
-      box-sizing: border-box;
-    }
-    .warning {
-      background: linear-gradient(45deg, #ff9800, #f57c00);
-      color: #fff;
-      padding: 12px;
-      border-radius: 14px;
-      font-size: 13px;
-      margin-top: 15px;
-    }
-    .swish-qr {
-      max-width: 180px;
-      margin: 15px auto;
-      display: block;
-    }
+    .btn:hover { transform: scale(1.05); }
     .lang-btn {
       position: fixed;
-      top: 15px;
       right: 15px;
+      top: 15px;
       z-index: 1000;
-      font-size: 14px;
-      padding: 8px 18px;
+      padding: 6px 16px;
+      font-size: 13px;
+    }
+    .slots {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:15px;
+    }
+    .slot {
+      padding:14px 20px;
+      margin:8px;
+      border-radius:18px;
+      font-weight:bold;
+      cursor:pointer;
+      min-width:100px;
+      transition:.2s;
+    }
+    .available {
+      background:linear-gradient(45deg,#4caf50,#45a049);
+      color:#fff;
+      box-shadow:0 8px 18px rgba(76,175,80,0.5);
+    }
+    .available:hover { transform:scale(1.08); }
+    .reserved {
+      background:linear-gradient(45deg,#ffb300,#ff9800);
+      color:#fff;
+    }
+    .paid {
+      background:linear-gradient(45deg,#2e7d32,#1b5e20);
+      color:#fff;
+    }
+    .section {
+      background:rgba(255,255,255,0.95);
+      border-radius:20px;
+      padding:20px;
+      margin-top:20px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.25);
+      text-align:left;
+    }
+    #bookingForm {
+      max-width:420px;
+      margin:20px auto;
+      display:none;
+    }
+    label { display:block; margin-top:8px; font-size:14px; }
+    input,select {
+      width:100%;
+      padding:10px;
+      border-radius:12px;
+      border:2px solid #ddd;
+      margin-top:4px;
+      box-sizing:border-box;
+      font-size:14px;
+    }
+    .warning {
+      background:linear-gradient(45deg,#ff9800,#f57c00);
+      color:#fff;
+      padding:10px;
+      border-radius:12px;
+      font-size:12px;
+      margin-top:10px;
+    }
+    .booking-item {
+      margin:6px 0;
+      padding:8px 10px;
+      border-radius:12px;
+      background:#f5f5f5;
+      font-size:14px;
+    }
+    .booking-actions button {
+      font-size:11px;
+      padding:4px 10px;
+      margin-left:4px;
+    }
+    .swish-qr {
+      max-width:160px;
+      display:block;
+      margin:10px auto;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <button class="btn lang-btn" onclick="toggleLang()">🇸🇪 SV / 🇸🇦 AR</button>
+<div class="container">
+  <button class="btn lang-btn" onclick="toggleLang()">🇸🇪 / 🇸🇦</button>
 
-    <h1>🏆 Golden Fingers Skövde 🏆</h1>
-    <p style="font-size:1.4em;color:#fff;font-weight:bold;margin-bottom:20px;">
-      Bästa Klipp 250 SEK | Ny Kund 99 SEK
-    </p>
+  <h1>Golden Fingers Skövde</h1>
+  <h2 id="subtitle">Boka din tid online</h2>
+  <p style="color:#fff;font-weight:bold;">
+    Klippning 250 SEK · Ny kund 99 SEK · Öppet 10:00–18:00
+  </p>
 
-    <h2 id="timeTitle" style="color:#fff;font-size:2em;margin-bottom:15px;">
-      Välj Tid Idag (8 platser)
-    </h2>
+  <h2 id="timeTitle">Välj tid idag (max 8 tider)</h2>
+  <div id="slots" class="slots"></div>
 
-    <div id="slots" style="display:flex;flex-wrap:wrap;justify-content:center;"></div>
+  <div id="dropinInfo" style="display:none;margin-top:20px;color:#fff;font-size:1.2em;font-weight:bold;">
+    Fredag & lördag: Endast drop‑in (kö‑system) i salongen. Ingen onlinebokning.
+  </div>
 
-    <div id="bookings">
-      <h3 style="margin-top:0;">📅 Dagens bokningar</h3>
-      <div id="bookingList"></div>
+  <div id="bookingForm" class="section">
+    <h3>📋 Boka tid</h3>
+    <label>Namn</label>
+    <input id="name" type="text" placeholder="Fullt namn">
+    <label>Telefon</label>
+    <input id="phone" type="tel" placeholder="+46...">
+    <label>E‑post</label>
+    <input id="email" type="email" placeholder="kund@mail.se">
+    <label>Tjänst</label>
+    <select id="service">
+      <option value="250">✂️ Klippning 250 SEK</option>
+      <option value="99">🎉 Ny kund 99 SEK</option>
+    </select>
+    <button class="btn" type="button" style="width:100%;margin-top:10px;" onclick="bookAndPay()">
+      ✅ Boka & betala med Swish
+    </button>
+    <div class="warning">
+      ⚠️ Avbokning: Ingen återbetalning. Vid avbokning förloras hela beloppet.
     </div>
-
-    <div id="bookingForm">
-      <h3>📋 Boka din tid</h3>
-      <label>Namn</label>
-      <input id="name" type="text" placeholder="Fullt namn" />
-      <label>Telefon</label>
-      <input id="phone" type="tel" placeholder="+46..." />
-      <label>E‑post</label>
-      <input id="customerEmail" type="email" placeholder="kund@mail.se" />
-      <label>Tjänst</label>
-      <select id="service">
-        <option value="250">✂️ Vanlig Klippning 250 SEK</option>
-        <option value="99">🎉 Ny Kund 99 SEK</option>
-      </select>
-      <button class="btn" style="width:100%;margin-top:10px;" onclick="bookSlot()">
-        ✅ BOKA & BETALA SWISH
-      </button>
-
-      <div class="warning">
-        ⚠️ AVBOKNING: Ingen återbetalning. Vid avbokning förloras hela beloppet.
-      </div>
-
-      <div style="margin-top:15px;text-align:center;">
-        <h4>💰 Swish betalning</h4>
-        <p style="font-size:20px;font-weight:bold;color:#4caf50;">1236112585</p>
-        <img
-          class="swish-qr"
-          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=SWISH:1236112585"
-          alt="Swish QR"
-        />
-        <p style="font-size:12px;">Skanna QR eller ange numret i Swish‑appen.</p>
-      </div>
+    <div style="text-align:center;margin-top:10px;">
+      <strong>Swish:</strong> 1236112585<br>
+      <img class="swish-qr"
+           src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=SWISH:1236112585"
+           alt="Swish QR">
     </div>
   </div>
 
-  <script>
-    // تهيئة EmailJS بمفتاحك
-    emailjs.init("RdqnDhUxmbBR69lCQ"); // Public Key تبعك [web:46][web:39]
+  <div id="todayBookings" class="section">
+    <h3>📅 Dagens bokningar</h3>
+    <div id="bookingList"></div>
+    <p style="font-size:12px;color:#555;margin-top:8px;">
+      Klicka ✅ när betalning syns på Swish. ❌ tar bort bokningen och frigör tiden.
+    </p>
+  </div>
+</div>
 
-    const salonPhone = "+46724444101";
-    const salonEmail = "omar1tftnaze@gmail.com";
-    const swishNumber = "1236112585";
+<script>
+  // EmailJS init
+  emailjs.init("RdqnDhUxmbBR69lCQ"); // Public key تبعك [web:39]
 
-    let lang = "sv";
-    const slots = ["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00"];
-    let bookings = JSON.parse(localStorage.getItem("goldenFingersBookings")) || [];
-    let selectedTime = null;
+  const SERVICE_ID   = "service_osd1mqu";
+  const TEMPLATE_ID  = "template_erd8bqc";
+  const SALON_EMAIL  = "omar1tftnaze@gmail.com";
+  const SWISH_NUMBER = "1236112585";
 
-    function toggleLang() {
-      lang = lang === "sv" ? "ar" : "sv";
-      document.getElementById("timeTitle").textContent =
-        lang === "sv" ? "Välj Tid Idag (8 platser)" : "اختر وقت اليوم (٨ مواعيد)";
-    }
+  let lang = "sv";
+  const slots = ["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00"];
+  let selectedTime = null;
+  let bookings = JSON.parse(localStorage.getItem("gf_bookings") || "[]");
 
-    function initSlots() {
-      const slotsDiv = document.getElementById("slots");
+  function saveBookings() {
+    localStorage.setItem("gf_bookings", JSON.stringify(bookings));
+  }
+
+  function toggleLang() {
+    lang = lang === "sv" ? "ar" : "sv";
+    document.getElementById("subtitle").textContent =
+      lang === "sv" ? "Boka din tid online" : "احجز موعدك أونلاين";
+    document.getElementById("timeTitle").textContent =
+      lang === "sv" ? "Välj tid idag (max 8 tider)" : "اختر وقت اليوم (حتى ٨ مواعيد)";
+  }
+
+  function isWeekend() {
+    const d = new Date();
+    const day = d.getDay(); // 0=Sunday ... 5=Friday, 6=Saturday [web:117]
+    return day === 5 || day === 6;
+  }
+
+  function initSlots() {
+    const slotsDiv   = document.getElementById("slots");
+    const dropinInfo = document.getElementById("dropinInfo");
+    const form       = document.getElementById("bookingForm");
+    const todayStr   = new Date().toISOString().split("T")[0];
+
+    if (isWeekend()) {
       slotsDiv.innerHTML = "";
-      const today = new Date().toISOString().split("T")[0];
-
-      slots.forEach(time => {
-        const taken = bookings.some(
-          b => b.time === time && b.date === today && !b.paid
-        );
-        const div = document.createElement("div");
-        div.className = "slot " + (taken ? "booked" : "available");
-        div.textContent = time;
-        if (!taken) div.onclick = () => selectSlot(time);
-        slotsDiv.appendChild(div);
-      });
-
-      updateBookings();
+      form.style.display = "none";
+      dropinInfo.style.display = "block";
+      updateBookingList();
+      return;
+    } else {
+      dropinInfo.style.display = "none";
+      form.style.display = "block";
     }
 
-    function selectSlot(time) {
-      selectedTime = time;
-      document.getElementById("bookingForm").style.display = "block";
-      document.getElementById("name").focus();
-      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-    }
+    slotsDiv.innerHTML = "";
+    const todays = bookings.filter(b => b.date === todayStr);
+    slots.forEach(time => {
+      const b = todays.find(x => x.time === time);
+      const div = document.createElement("div");
+      let cls = "available";
+      let label = time;
 
-    function bookSlot() {
-      const name = document.getElementById("name").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const email = document.getElementById("customerEmail").value.trim();
-      const priceVal = document.getElementById("service").value;
-
-      if (!name || !phone || !email || !selectedTime) {
-        alert(lang === "sv" ? "Fyll i alla fält!" : "املأ جميع الحقول!");
-        return;
+      if (b) {
+        if (b.status === "paid") {
+          cls = "paid";
+          label = time + " ✔";
+        } else {
+          cls = "reserved";
+          label = time + " (reserverad)";
+        }
+      } else {
+        div.onclick = () => selectSlot(time);
       }
+      div.className = "slot " + cls;
+      div.textContent = label;
+      slotsDiv.appendChild(div);
+    });
 
-      const today = new Date().toISOString().split("T")[0];
+    updateBookingList();
+  }
 
-      const booking = {
-        id: Date.now(),
-        name,
-        phone,
-        email,
-        time: selectedTime,
-        price: parseInt(priceVal),
-        service:
-          priceVal === "99" ? "Ny Kund 99 SEK" : "Vanlig Klippning 250 SEK",
-        date: today,
-        createdAt: new Date().toLocaleString("sv-SE"),
-        paid: false,
-        reminded: false
-      };
+  function selectSlot(time) {
+    selectedTime = time;
+    document.getElementById("bookingForm").scrollIntoView({behavior:"smooth"});
+  }
 
-      bookings.unshift(booking);
-      localStorage.setItem("goldenFingersBookings", JSON.stringify(bookings));
+  function bookAndPay() {
+    const name  = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const priceVal = document.getElementById("service").value;
 
-      sendOwnerEmail(booking);
-      sendCustomerEmail(booking);
-
-      alert(
-        `✅ Bokat!
-Betala ${booking.price} SEK till Swish ${swishNumber}.`
-      );
-
-      document.getElementById("bookingForm").style.display = "none";
-      document.querySelectorAll("#bookingForm input").forEach(i => (i.value = ""));
-      document.getElementById("service").value = "250";
-      selectedTime = null;
-      initSlots();
+    if (!selectedTime || !name || !phone || !email) {
+      alert(lang === "sv" ? "Fyll i alla fält och välj tid." : "املا كل الحقول واختر وقتاً.");
+      return;
     }
 
-    // إيميل لصاحب الصالون (Template: template_erd8bqc)
-    function sendOwnerEmail(booking) {
-      emailjs
-        .send("service_osd1mqu", "template_erd8bqc", { // Template ID تبعك [web:39]
-          to_email: salonEmail,
-          name: booking.name,
-          phone: booking.phone,
-          time: booking.time,
-          price: booking.price,
-          message: `
-NY BOKNING!
+    const todayStr = new Date().toISOString().split("T")[0];
+    const existing = bookings.find(b => b.date === todayStr && b.time === selectedTime);
+    if (existing) {
+      alert("Tiden är redan reserverad.");
+      initSlots();
+      return;
+    }
 
+    const booking = {
+      id: Date.now(),
+      date: todayStr,
+      time: selectedTime,
+      name,
+      phone,
+      email,
+      price: parseInt(priceVal,10),
+      service: priceVal === "99" ? "Ny kund 99 SEK" : "Klippning 250 SEK",
+      status: "reserved",   // reserved -> paid
+      reminded: false
+    };
+    bookings.push(booking);
+    saveBookings();
+
+    sendEmails(booking);   // يرسل لك وللزبون معاً [web:113]
+
+    alert(`Din tid ${booking.time} är reserverad.
+Betala ${booking.price} SEK till Swish ${SWISH_NUMBER}.`);
+
+    openSwish(booking);    // محاولة فتح تطبيق Swish
+
+    // تنظيف الفورم
+    document.getElementById("name").value  = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("service").value = "250";
+    selectedTime = null;
+    initSlots();
+  }
+
+  function sendEmails(booking) {
+    const baseMessage = `
 Namn: ${booking.name}
 Telefon: ${booking.phone}
 Tid: ${booking.time}
 Pris: ${booking.price} SEK
+Datum: ${booking.date}
+    `;
 
-Golden Fingers Skövde
-`
-        })
-        .then(() => console.log("Owner email sent"))
-        .catch(err => console.log("EmailJS error:", err));
-    }
-
-    // إيميل تأكيد للزبون (نفس التمبليت حالياً، تقدر تعمل له Template ثاني لاحقاً)
-    function sendCustomerEmail(booking) {
-      emailjs.send("service_osd1mqu", "template_erd8bqc", {
-        to_email: booking.email,
-        name: booking.name,
-        phone: booking.phone,
-        time: booking.time,
-        price: booking.price,
-        message: `
-Tack ${booking.name}!
-
-Din tid: ${booking.time}
-Belopp: ${booking.price} SEK
-Swish: ${swishNumber}
-
-Viktigt: Ingen återbetalning vid avbokning.
-`
-      });
-    }
-
-    function updateBookings() {
-      const today = new Date().toISOString().split("T")[0];
-      const listDiv = document.getElementById("bookingList");
-      const todayBookings = bookings.filter(b => b.date === today);
-
-      if (!todayBookings.length) {
-        listDiv.innerHTML =
-          "<p style='color:#777;font-style:italic;'>Inga bokningar idag.</p>";
-        return;
-      }
-
-      listDiv.innerHTML = todayBookings
-        .map(
-          b => `
-        <div style="margin:8px 0;padding:10px 12px;border-radius:14px;
-                    background:${b.paid ? "#d4edda" : "#ffe0b2"};">
-          <strong>${b.time}</strong> – ${b.name} (${b.service})
-          <span style="float:right;color:${b.paid ? "green" : "orange"};">
-            ${b.paid ? "Betald" : "Obetald"}
-          </span>
-        </div>
-      `
-        )
-        .join("");
-    }
-
-    // تذكير داخلي 30 دقيقة قبل الموعد (تقدر لاحقاً تربطه بـ SMS/WhatsApp)
-    setInterval(() => {
-      const now = new Date();
-      bookings.forEach(b => {
-        const bookingTime = new Date(`${b.date}T${b.time}:00`);
-        const diff = bookingTime - now;
-        if (diff > 0 && diff <= 30 * 60 * 1000 && !b.reminded) {
-          console.log(`⏰ Påminnelse: ${b.name} om 30 min (${b.time})`);
-          b.reminded = true;
-          localStorage.setItem("goldenFingersBookings", JSON.stringify(bookings));
-        }
-      });
-    }, 60000);
-
-    // علامة دفع (اختبار): زر P من الكيبورد يعلّم آخر حجز غير مدفوع كـ Paid
-    document.addEventListener("keydown", e => {
-      if (e.key.toLowerCase() === "p") {
-        const idx = bookings.findIndex(b => !b.paid);
-        if (idx !== -1) {
-          bookings[idx].paid = true;
-          localStorage.setItem("goldenFingersBookings", JSON.stringify(bookings));
-          initSlots();
-          alert("✅ Markeras som betald (test).");
-        }
-      }
+    // 1) إيميل لصاحب الصالون
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+      to_email: SALON_EMAIL,
+      name: booking.name,
+      phone: booking.phone,
+      time: booking.time,
+      price: booking.price,
+      message: "NY BOKNING!
+" + baseMessage + "
+Golden Fingers Skövde"
     });
 
+    // 2) إيميل تأكيد للزبون
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+      to_email: booking.email,
+      name: booking.name,
+      phone: booking.phone,
+      time: booking.time,
+      price: booking.price,
+      message:
+        `Tack ${booking.name}!
+` +
+        baseMessage +
+        `
+Swish: ${SWISH_NUMBER}
+Viktigt: Ingen återbetalning vid avbokning.`
+    });
+  }
+
+  function openSwish(booking) {
+    const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+    const amount   = booking.price;
+
+    if (isMobile) {
+      // محاولة فتح تطبيق Swish؛ بعض المتصفحات قد لا تدعم كل البارامترات رسميًا [web:92][web:95]
+      const url = `swish://payment?number=${SWISH_NUMBER}&amount=${amount}`;
+      window.location.href = url;
+    } else {
+      window.open(
+        `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=SWISH:${SWISH_NUMBER}`,
+        "_blank"
+      );
+    }
+  }
+
+  function updateBookingList() {
+    const list = document.getElementById("bookingList");
+    const todayStr = new Date().toISOString().split("T")[0];
+    const todays = bookings.filter(b => b.date === todayStr);
+
+    if (!todays.length) {
+      list.innerHTML = "<p style='color:#777;font-style:italic;'>Inga bokningar idag.</p>";
+      return;
+    }
+
+    list.innerHTML = todays.map(b => `
+      <div class="booking-item">
+        <strong>${b.time}</strong> – ${b.name} (${b.service}) ${b.price} SEK
+        <span style="float:right;color:${b.status === "paid" ? "green" : "orange"};">
+          ${b.status === "paid" ? "Betald" : "Reserverad"}
+        </span>
+        <div class="booking-actions" style="margin-top:4px;text-align:right;">
+          <button class="btn" style="background:#4caf50;color:#fff;padding:4px 8px;font-size:11px;"
+                  onclick="markPaid(${b.id})">✅ Betald</button>
+          <button class="btn" style="background:#f44336;color:#fff;padding:4px 8px;font-size:11px;"
+                  onclick="removeBooking(${b.id})">❌ Ta bort</button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function markPaid(id) {
+    const b = bookings.find(x => x.id === id);
+    if (b) {
+      b.status = "paid";
+      saveBookings();
+      initSlots();
+    }
+  }
+
+  function removeBooking(id) {
+    if (!confirm("Ta bort bokningen och frigöra tiden?")) return;
+    bookings = bookings.filter(b => b.id !== id);
+    saveBookings();
     initSlots();
-  </script>
+  }
+
+  // تذكير داخلي 30 دقيقة قبل الموعد (للمستقبل لو حابب تربطه بـ SMS)
+  setInterval(() => {
+    const now = new Date();
+    bookings.forEach(b => {
+      const t = new Date(`${b.date}T${b.time}:00`);
+      const diff = t - now;
+      if (diff > 0 && diff <= 30*60*1000 && !b.reminded) {
+        console.log(`Påminnelse 30 min: ${b.name} ${b.time}`);
+        b.reminded = true;
+        saveBookings();
+      }
+    });
+  }, 60000);
+
+  initSlots();
+</script>
 </body>
 </html>
