@@ -2,44 +2,49 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
-  <title>Test EmailJS – Golden Fingers</title>
+  <title>Testbokning – Golden Fingers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 </head>
-<body style="font-family:Arial,sans-serif;background:#f5f5f5;padding:20px;">
-  <h2>Test – Email & Bokning</h2>
-  <p>Fyll i namn och e‑post, klicka sedan på knappen för att skicka ett testmail till salongen.</p>
+<body style="font-family:Arial,sans-serif;background:#f2f2f2;padding:20px;">
+  <h2>Testbokning – Email & knapp</h2>
+  <p>Fyll i fälten och klicka på knappen. Om allt fungerar:</p>
+  <ul>
+    <li>Du ser ett meddelande “✅ bokad”.</li>
+    <li>Du får ett mejl till salongens adress.</li>
+  </ul>
 
-  <div style="max-width:320px;background:#fff;padding:12px 14px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+  <div style="max-width:320px;background:#fff;margin-top:12px;padding:12px 14px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.12);">
     <label>Namn</label>
     <input id="name" type="text" style="width:100%;margin:4px 0 8px;padding:6px;" placeholder="Ditt namn">
 
     <label>E‑post</label>
     <input id="email" type="email" style="width:100%;margin:4px 0 12px;padding:6px;" placeholder="din@mail.se">
 
-    <button onclick="sendTest()" style="width:100%;padding:8px;border:none;border-radius:6px;background:#ffb300;color:#000;font-weight:bold;cursor:pointer;">
+    <button type="button" onclick="bookAndPay()"
+            style="width:100%;padding:8px;border:none;border-radius:6px;background:#ffb300;color:#000;font-weight:bold;cursor:pointer;">
       Skicka testbokning
     </button>
   </div>
 
   <script>
-    // نفس مفاتيحك بالضبط
+    // بيانات EmailJS كما هي عندك
     emailjs.init("RdqnDhUxmbBR69lCQ"); // public key [web:39]
     const SERVICE_ID  = "service_osd1mqu";
     const TEMPLATE_ID = "template_erd8bqc";
     const SALON_EMAIL = "omar1tftnaze@gmail.com";
 
-    function sendTest(){
+    function bookAndPay() {
       const name  = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
 
-      if(!name || !email || !email.includes("@") || !email.includes(".")){
+      if (!name || !email || !email.includes("@") || !email.includes(".")) {
         alert("اكتب اسم وبريد إلكتروني صحيح.");
         return;
       }
 
       const params = {
-        to_email: SALON_EMAIL,   // الإيميل الذي تستقبله أنت
+        to_email: SALON_EMAIL,   // يصل فقط لصاحب الصالون
         name: name,
         phone: "TEST",
         time: "TEST 10:00",
@@ -48,13 +53,14 @@
       };
 
       emailjs.send(SERVICE_ID, TEMPLATE_ID, params)
-        .then(function(response){
-          alert("✅ تم إرسال الإيميل بنجاح إلى صالونك.
-status: " + response.status);
-        }, function(error){
+        .then(function(res) {
+          alert("✅ تم الحجز التجريبي وإرسال الإيميل.
+status: " + res.status);
+        })
+        .catch(function(err) {
           alert("❌ فشل الإرسال.
-status: " + error.status + "
-" + error.text);
+status: " + err.status + "
+" + (err.text || ''));
         });
     }
   </script>
