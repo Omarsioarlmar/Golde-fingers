@@ -2,487 +2,61 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
-  <title>SALON GOLDEN FINGERS - Skövde</title>
+  <title>Test EmailJS – Golden Fingers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <style>
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body{
-      font-family:"Segoe UI",Arial,sans-serif;
-      background:radial-gradient(circle at top,#ffe082,#ff6b6b,#4ecdc4,#45b7d1);
-      background-size:250% 250%;
-      animation:bgMove 8s ease-in-out infinite;
-      color:#222;
-    }
-    @keyframes bgMove{
-      0%,100%{background-position:0 0}
-      25%{background-position:100% 0}
-      50%{background-position:100% 100%}
-      75%{background-position:0 100%}
-    }
-    .page{max-width:1200px;margin:0 auto;padding:16px 16px 40px;}
-
-    /* HEADER */
-    .hero{
-      background:rgba(0,0,0,0.75);
-      color:#fff;
-      border-radius:20px;
-      padding:14px 16px;
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:space-between;
-      align-items:center;
-      box-shadow:0 18px 40px rgba(0,0,0,0.35);
-      margin-bottom:16px;
-    }
-    .hero-left{flex:1 1 240px;}
-    .brand-title{
-      font-size:1.7rem;
-      font-weight:700;
-      letter-spacing:.05em;
-      background:linear-gradient(90deg,#ffeb3b,#ffc107,#ff9800);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-    }
-    .brand-sub{font-size:.85rem;opacity:.9;margin-top:2px;}
-    .address-link{color:#ffeb3b;text-decoration:underline;cursor:pointer;}
-
-    .hero-right{flex:1 1 220px;text-align:right;font-size:.85rem;}
-    .hero-right .row{margin-top:3px;}
-    .btn{
-      border:none;border-radius:999px;padding:6px 12px;font-size:.8rem;
-      cursor:pointer;display:inline-flex;align-items:center;gap:4px;
-      margin-left:4px;margin-top:4px;white-space:nowrap;
-      transition:transform .15s,box-shadow .15s;
-    }
-    .btn:active{transform:scale(.96);}
-    .btn-call{
-      background:linear-gradient(45deg,#4caf50,#2e7d32);
-      color:#fff;box-shadow:0 8px 20px rgba(76,175,80,0.6);
-    }
-    .btn-wa{
-      background:linear-gradient(45deg,#25d366,#128c7e);
-      color:#fff;box-shadow:0 8px 20px rgba(18,140,126,0.5);
-    }
-    .btn-lang{
-      background:rgba(255,255,255,0.1);
-      color:#fff;border:1px solid rgba(255,255,255,0.3);
-    }
-    @media(max-width:850px){
-      .hero{flex-direction:column;align-items:flex-start;}
-      .hero-right{text-align:left;margin-top:8px;}
-    }
-
-    /* LAYOUT */
-    .two-col{
-      display:grid;
-      grid-template-columns:minmax(0,1.1fr) minmax(0,1.1fr);
-      gap:16px;
-    }
-    @media(max-width:900px){.two-col{grid-template-columns:minmax(0,1fr);}}
-    .panel{
-      background:rgba(255,255,255,0.96);
-      border-radius:18px;
-      padding:14px 16px 18px;
-      box-shadow:0 14px 32px rgba(0,0,0,0.22);
-    }
-
-    /* INFO */
-    .panel h3{font-size:1rem;margin-bottom:6px;}
-    .info-block{margin-bottom:8px;}
-    .info-label{
-      font-size:.8rem;text-transform:uppercase;
-      letter-spacing:.06em;color:#777;font-weight:600;
-    }
-    .info-value{font-size:.9rem;margin-top:2px;}
-    .services-list{list-style:none;font-size:.9rem;margin-top:4px;}
-    .services-list li{display:flex;justify-content:space-between;padding:2px 0;}
-    .hours-grid{
-      display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:2px 10px;font-size:.85rem;margin-top:2px;
-    }
-
-    /* BOOKING */
-    .booking-header{text-align:center;margin-bottom:6px;}
-    .booking-header h2{font-size:1rem;color:#333;}
-    .booking-header small{font-size:.8rem;color:#666;}
-
-    .slots{
-      display:flex;flex-wrap:wrap;justify-content:center;
-      gap:6px;margin:10px 0 6px;
-    }
-    .slot{
-      padding:8px 14px;border-radius:16px;font-weight:600;
-      font-size:.9rem;cursor:pointer;border:none;min-width:70px;
-      text-align:center;transition:transform .15s,opacity .15s,box-shadow .15s;
-    }
-    .slot.available{
-      background:linear-gradient(45deg,#4caf50,#2e7d32);
-      color:#fff;box-shadow:0 8px 20px rgba(76,175,80,0.5);
-    }
-    .slot.reserved{
-      background:linear-gradient(45deg,#ef5350,#c62828);
-      color:#fff;box-shadow:0 6px 16px rgba(244,67,54,0.5);
-    }
-
-    .dropin-banner{
-      text-align:center;background:rgba(0,0,0,0.75);
-      color:#fff;border-radius:14px;padding:8px;font-size:.85rem;margin-top:6px;
-    }
-
-    .form{
-      margin-top:8px;border-top:1px dashed #eee;
-      padding-top:8px;font-size:.85rem;
-    }
-    .form label{
-      display:block;margin-top:6px;font-weight:600;color:#555;
-    }
-    .form input,.form select{
-      width:100%;padding:7px 9px;border-radius:9px;
-      border:1px solid #ccc;margin-top:3px;font-size:.9rem;
-    }
-    .form button{
-      width:100%;margin-top:10px;padding:9px;border-radius:999px;
-      border:none;font-size:.95rem;font-weight:600;
-      background:linear-gradient(45deg,#ffd700,#ffa000);
-      cursor:pointer;box-shadow:0 9px 22px rgba(255,193,7,0.7);
-    }
-    .warning{
-      margin-top:6px;font-size:.75rem;
-      background:linear-gradient(45deg,#ff9800,#f57c00);
-      color:#fff;padding:6px 8px;border-radius:9px;
-    }
-    .swish-block{margin-top:4px;text-align:center;font-size:.8rem;}
-    .swish-qr{max-width:110px;border-radius:12px;margin-top:4px;}
-
-    .bookings-list{
-      margin-top:6px;max-height:220px;overflow-y:auto;font-size:.8rem;
-    }
-    .booking-item{
-      padding:5px 8px;margin-bottom:4px;border-radius:8px;background:#fff4e0;
-    }
-  </style>
 </head>
-<body>
-<div class="page">
+<body style="font-family:Arial,sans-serif;background:#f5f5f5;padding:20px;">
+  <h2>Test – Email & Bokning</h2>
+  <p>Fyll i namn och e‑post, klicka sedan på knappen för att skicka ett testmail till salongen.</p>
 
-  <!-- HEADER -->
-  <header class="hero">
-    <div class="hero-left">
-      <div class="brand-title">SALON GOLDEN FINGERS</div>
-      <div class="brand-sub">
-        <span class="address-link" onclick="openMaps()">
-          Mariestadsvägen 86, 549 56 Skövde
-        </span>
-      </div>
-      <div style="font-size:.8rem;margin-top:4px;opacity:.9;">
-        ✂️ Klippning · Skägg · Klippning + Skägg
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="row">📞 <strong>+46 72 444 41 01</strong></div>
-      <div class="row">
-        <button class="btn btn-call" onclick="window.location.href='tel:+46724444101'">Ring</button>
-        <button class="btn btn-wa" onclick="window.location.href='https://wa.me/46724444101'">WhatsApp</button>
-        <button class="btn btn-lang" onclick="toggleLang()">SV / AR</button>
-      </div>
-      <div class="row" style="font-size:.78rem;margin-top:4px;opacity:.9;">
-        Sön–tor bokning · Fre–lör drop‑in (kö‑system)
-      </div>
-    </div>
-  </header>
+  <div style="max-width:320px;background:#fff;padding:12px 14px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+    <label>Namn</label>
+    <input id="name" type="text" style="width:100%;margin:4px 0 8px;padding:6px;" placeholder="Ditt namn">
 
-  <div class="two-col">
-    <!-- INFO -->
-    <section class="panel">
-      <h3 id="infoTitle">Salongsinfo</h3>
+    <label>E‑post</label>
+    <input id="email" type="email" style="width:100%;margin:4px 0 12px;padding:6px;" placeholder="din@mail.se">
 
-      <div class="info-block">
-        <div class="info-label">Adress</div>
-        <div class="info-value">
-          <span class="address-link" onclick="openMaps()">
-            SALON GOLDEN FINGERS, Mariestadsvägen 86, 549 56 Skövde
-          </span>
-        </div>
-      </div>
-
-      <div class="info-block">
-        <div class="info-label">Öppettider</div>
-        <div class="hours-grid">
-          <span>Sön–Tor:</span><span>10:00 – 18:00</span>
-          <span>Fre–Lör:</span><span>Drop‑in (kö‑system)</span>
-          <span>Sön:</span><span>Stängt vid behov</span>
-        </div>
-      </div>
-
-      <div class="info-block">
-        <div class="info-label">Tjänster</div>
-        <ul class="services-list">
-          <li><span>Klippning</span><span>250 SEK</span></li>
-          <li><span>Skäggtrimning</span><span>250 SEK</span></li>
-          <li><span>Klippning + Skägg</span><span>500 SEK</span></li>
-        </ul>
-      </div>
-
-      <div class="info-block">
-        <div class="info-label">Info</div>
-        <div class="info-value">
-          Onlinebokning gäller sön–tor. Fredag & lördag enbart drop‑in i salongen.
-        </div>
-      </div>
-    </section>
-
-    <!-- BOOKING -->
-    <section class="panel">
-      <div class="booking-header">
-        <h2 id="bookingTitle">Boka tid idag (max 8 tider)</h2>
-        <small id="bookingNote">Onlinebokning aktiv sön–tor. Fre–lör endast drop‑in.</small>
-      </div>
-
-      <div id="slotsWrapper">
-        <div id="slots" class="slots"></div>
-      </div>
-
-      <div id="dropinInfo" class="dropin-banner" style="display:none;">
-        Fre & lör: Endast drop‑in (kö‑system) i salongen. Ingen onlinebokning dessa dagar.
-      </div>
-
-      <div id="bookingForm" class="form">
-        <label for="name">Namn</label>
-        <input id="name" type="text" placeholder="Fullt namn">
-        <label for="phone">Telefon</label>
-        <input id="phone" type="tel" placeholder="+46...">
-        <label for="email">E‑post</label>
-        <input id="email" type="email" placeholder="kund@mail.se">
-        <label for="service">Tjänst</label>
-        <select id="service">
-          <option value="250-klipp">Klippning – 250 SEK</option>
-          <option value="250-skagg">Skäggtrimning – 250 SEK</option>
-          <option value="500-bada">Klippning + Skägg – 500 SEK</option>
-        </select>
-        <button type="button" onclick="bookAndPay()">✅ Boka & betala med Swish</button>
-        <div class="warning">
-          ⚠️ Avbokning: Ingen återbetalning. Vid avbokning förloras hela beloppet.
-        </div>
-        <div class="swish-block">
-          Swish: <strong>1236112585</strong><br>
-          <img class="swish-qr"
-               src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=SWISH:1236112585"
-               alt="Swish QR">
-        </div>
-      </div>
-
-      <div style="margin-top:8px;">
-        <strong>📅 Dagens bokningar</strong>
-        <div id="bookingList" class="bookings-list"></div>
-      </div>
-    </section>
+    <button onclick="sendTest()" style="width:100%;padding:8px;border:none;border-radius:6px;background:#ffb300;color:#000;font-weight:bold;cursor:pointer;">
+      Skicka testbokning
+    </button>
   </div>
-</div>
 
-<script>
-  // EmailJS init
-  emailjs.init("RdqnDhUxmbBR69lCQ"); // public key [web:39]
+  <script>
+    // نفس مفاتيحك بالضبط
+    emailjs.init("RdqnDhUxmbBR69lCQ"); // public key [web:39]
+    const SERVICE_ID  = "service_osd1mqu";
+    const TEMPLATE_ID = "template_erd8bqc";
+    const SALON_EMAIL = "omar1tftnaze@gmail.com";
 
-  const SERVICE_ID   = "service_osd1mqu";
-  const TEMPLATE_ID  = "template_erd8bqc";
-  const SALON_EMAIL  = "omar1tftnaze@gmail.com";
-  const SWISH_NUMBER = "1236112585";
+    function sendTest(){
+      const name  = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
 
-  let lang = "sv";
-  const slots = ["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00"];
-  let selectedTime = null;
-  let bookings = JSON.parse(localStorage.getItem("gf_bookings") || "[]");
+      if(!name || !email || !email.includes("@") || !email.includes(".")){
+        alert("اكتب اسم وبريد إلكتروني صحيح.");
+        return;
+      }
 
-  function saveBookings(){ localStorage.setItem("gf_bookings", JSON.stringify(bookings)); }
+      const params = {
+        to_email: SALON_EMAIL,   // الإيميل الذي تستقبله أنت
+        name: name,
+        phone: "TEST",
+        time: "TEST 10:00",
+        price: 0,
+        message: `Testbokning från ${name} – ${email}`
+      };
 
-  function openMaps(){
-    const url = "https://www.google.com/maps/search/?api=1&query=" +
-      encodeURIComponent("SALON GOLDEN FINGERS, Mariestadsvägen 86, 549 56 Skövde");
-    window.open(url,"_blank");
-  }
-
-  function toggleLang(){
-    lang = lang === "sv" ? "ar" : "sv";
-    document.getElementById("infoTitle").textContent =
-      lang === "sv" ? "Salongsinfo" : "معلومات الصالون";
-    document.getElementById("bookingTitle").textContent =
-      lang === "sv" ? "Boka tid idag (max 8 tider)" : "احجز موعد اليوم (حتى ٨ مواعيد)";
-    document.getElementById("bookingNote").textContent =
-      lang === "sv"
-        ? "Onlinebokning aktiv sön–tor. Fre–lör endast drop‑in."
-        : "الحجز أونلاين متاح من الأحد إلى الخميس. الجمعة والسبت نظام دور في الصالون فقط.";
-  }
-
-  function isWeekend(){
-    const d = new Date();
-    const day = d.getDay(); // 0=Sun..5=Fri,6=Sat [web:53]
-    return day === 5 || day === 6;
-  }
-
-  function initSlots(){
-    const slotsDiv   = document.getElementById("slots");
-    const dropinInfo = document.getElementById("dropinInfo");
-    const form       = document.getElementById("bookingForm");
-    const todayStr   = new Date().toISOString().split("T")[0];
-
-    if(isWeekend()){
-      slotsDiv.innerHTML = "";
-      form.style.display = "none";
-      dropinInfo.style.display = "block";
-      updateBookingList();
-      return;
+      emailjs.send(SERVICE_ID, TEMPLATE_ID, params)
+        .then(function(response){
+          alert("✅ تم إرسال الإيميل بنجاح إلى صالونك.
+status: " + response.status);
+        }, function(error){
+          alert("❌ فشل الإرسال.
+status: " + error.status + "
+" + error.text);
+        });
     }
-    dropinInfo.style.display = "none";
-    form.style.display = "block";
-
-    slotsDiv.innerHTML = "";
-    const todays = bookings.filter(b => b.date === todayStr);
-    slots.forEach(time=>{
-      const booked = todays.some(x=>x.time===time);
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "slot " + (booked ? "reserved" : "available");
-      btn.textContent = time;
-      if(!booked){ btn.onclick = ()=>selectSlot(time); }
-      slotsDiv.appendChild(btn);
-    });
-    updateBookingList();
-  }
-
-  function selectSlot(time){
-    selectedTime = time;
-    document.getElementById("bookingForm").scrollIntoView({behavior:"smooth"});
-  }
-
-  function validEmail(e){
-    return e && e.includes("@") && e.includes(".");
-  }
-
-  function bookAndPay(){
-    const name  = document.getElementById("name").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const serviceVal = document.getElementById("service").value;
-
-    if(!selectedTime || !name || !phone || !validEmail(email)){
-      alert(
-        lang === "sv"
-          ? "Fyll i alla fält och skriv en giltig e‑postadress."
-          : "املا جميع الحقول واكتب بريد إلكتروني صحيح."
-      );
-      return;
-    }
-
-    const [priceStr,type] = serviceVal.split("-");
-    const price = parseInt(priceStr,10);
-    let serviceText = "";
-    if(type==="skagg") serviceText = "Skäggtrimning 250 SEK";
-    else if(type==="bada") serviceText = "Klippning + Skägg 500 SEK";
-    else serviceText = "Klippning 250 SEK";
-
-    const todayStr = new Date().toISOString().split("T")[0];
-    if(bookings.some(b=>b.date===todayStr && b.time===selectedTime)){
-      alert("Tiden är redan reserverad.");
-      initSlots();
-      return;
-    }
-
-    const booking = {
-      id: Date.now(),
-      date: todayStr,
-      time: selectedTime,
-      name, phone, email,
-      price,
-      service: serviceText
-    };
-    bookings.push(booking);
-    saveBookings();
-
-    sendEmails(booking); // إلك وللزبون [web:39]
-
-    alert(
-      `✅ Tack ${booking.name}!
-
-` +
-      `Din tid ${booking.time} är bokad för ${booking.service}.
-` +
-      `Betala ${booking.price} SEK till Swish ${SWISH_NUMBER}.`
-    );
-
-    openSwish(booking);
-
-    document.getElementById("name").value  = "";
-    document.getElementById("phone").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("service").value = "250-klipp";
-    selectedTime = null;
-    initSlots();
-  }
-
-  function sendEmails(booking){
-    const base =
-`Namn: ${booking.name}
-Telefon: ${booking.phone}
-Tid: ${booking.time}
-Tjänst: ${booking.service}
-Pris: ${booking.price} SEK
-Datum: ${booking.date}
-`;
-
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-      to_email: SALON_EMAIL,
-      name: booking.name,
-      phone: booking.phone,
-      time: booking.time,
-      price: booking.price,
-      message: "NY BOKNING SALON GOLDEN FINGERS!
-" + base
-    });
-
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-      to_email: booking.email,
-      name: booking.name,
-      phone: booking.phone,
-      time: booking.time,
-      price: booking.price,
-      message:
-        `Tack ${booking.name}!
-` + base +
-        `
-Swish: ${SWISH_NUMBER}
-Viktigt: Ingen återbetalning vid avbokning.`
-    });
-  }
-
-  function openSwish(booking){
-    const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
-    const amount = booking.price;
-    if(isMobile){
-      const url = `swish://payment?number=${SWISH_NUMBER}&amount=${amount}`;
-      window.location.href = url;
-    }else{
-      window.open(
-        `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=SWISH:${SWISH_NUMBER}`,
-        "_blank"
-      );
-    }
-  }
-
-  function updateBookingList(){
-    const list = document.getElementById("bookingList");
-    const todayStr = new Date().toISOString().split("T")[0];
-    const todays = bookings.filter(b=>b.date===todayStr);
-    if(!todays.length){
-      list.innerHTML = "<p style='color:#777;font-style:italic;'>Inga bokningar idag.</p>";
-      return;
-    }
-    list.innerHTML = todays.map(b =>
-      `<div class="booking-item">${b.time} – ${b.name} (${b.service}) ${b.price} SEK</div>`
-    ).join("");
-  }
-
-  initSlots();
-</script>
+  </script>
 </body>
 </html>
