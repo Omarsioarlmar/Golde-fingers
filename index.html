@@ -2,67 +2,653 @@
 <html lang="sv">
 <head>
   <meta charset="UTF-8" />
-  <title>Testbokning – Golden Fingers</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SALON GOLDEN FINGERS - Skövde</title>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-</head>
-<body style="font-family:Arial,sans-serif;background:#f2f2f2;padding:20px;">
-  <h2>Testbokning – Email & knapp</h2>
-  <p>Fyll i fälten och klicka på knappen. Om allt fungerar:</p>
-  <ul>
-    <li>Du ser ett meddelande “✅ bokad”.</li>
-    <li>Du får ett mejl till salongens adress.</li>
-  </ul>
-
-  <div style="max-width:320px;background:#fff;margin-top:12px;padding:12px 14px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.12);">
-    <label>Namn</label>
-    <input id="name" type="text" style="width:100%;margin:4px 0 8px;padding:6px;" placeholder="Ditt namn">
-
-    <label>E‑post</label>
-    <input id="email" type="email" style="width:100%;margin:4px 0 12px;padding:6px;" placeholder="din@mail.se">
-
-    <button type="button" onclick="bookAndPay()"
-            style="width:100%;padding:8px;border:none;border-radius:6px;background:#ffb300;color:#000;font-weight:bold;cursor:pointer;">
-      Skicka testbokning
-    </button>
-  </div>
-
-  <script>
-    // بيانات EmailJS كما هي عندك
-    emailjs.init("RdqnDhUxmbBR69lCQ"); // public key [web:39]
-    const SERVICE_ID  = "service_osd1mqu";
-    const TEMPLATE_ID = "template_erd8bqc";
-    const SALON_EMAIL = "omar1tftnaze@gmail.com";
-
-    function bookAndPay() {
-      const name  = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-
-      if (!name || !email || !email.includes("@") || !email.includes(".")) {
-        alert("اكتب اسم وبريد إلكتروني صحيح.");
-        return;
-      }
-
-      const params = {
-        to_email: SALON_EMAIL,   // يصل فقط لصاحب الصالون
-        name: name,
-        phone: "TEST",
-        time: "TEST 10:00",
-        price: 0,
-        message: `Testbokning från ${name} – ${email}`
-      };
-
-      emailjs.send(SERVICE_ID, TEMPLATE_ID, params)
-        .then(function(res) {
-          alert("✅ تم الحجز التجريبي وإرسال الإيميل.
-status: " + res.status);
-        })
-        .catch(function(err) {
-          alert("❌ فشل الإرسال.
-status: " + err.status + "
-" + (err.text || ''));
-        });
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at top, #ffe082, #ff6b6b, #4ecdc4, #45b7d1);
+      background-size: 250% 250%;
+      animation: bgMove 8s ease-in-out infinite;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #222;
     }
-  </script>
+    @keyframes bgMove {
+      0%,100%{background-position:0% 0%}
+      25%{background-position:100% 0%}
+      50%{background-position:100% 100%}
+      75%{background-position:0% 100%}
+    }
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 16px 40px;
+    }
+
+    /* HERO HEADER */
+    .hero {
+      background: rgba(0,0,0,0.65);
+      border-radius: 24px;
+      padding: 16px 18px;
+      margin-bottom: 18px;
+      color: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+    }
+    .hero-left {
+      flex: 1 1 240px;
+      text-align: left;
+    }
+    .brand-title {
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      font-weight: 700;
+      background: linear-gradient(90deg,#ffeb3b,#ffc107,#ff9800);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand-sub {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    .hero-badges {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .hero-right {
+      flex: 1 1 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-end;
+      text-align: right;
+      font-size: 0.9rem;
+    }
+    .contact-line { opacity: 0.9; }
+    .contact-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform .15s, box-shadow .15s, background .15s;
+      white-space: nowrap;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-call {
+      background: linear-gradient(45deg,#4caf50,#2e7d32);
+      color: #fff;
+      box-shadow: 0 10px 25px rgba(76,175,80,0.5);
+    }
+    .btn-wa {
+      background: linear-gradient(45deg,#25d366,#128c7e);
+      color: #fff;
+      box-shadow: 0 10px 25px rgba(18,140,126,0.5);
+    }
+    .btn-mail {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.35);
+    }
+    .lang-toggle {
+      background: rgba(255,255,255,0.1);
+      color:#fff;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      cursor:pointer;
+      margin-top: 4px;
+    }
+
+    /* INFO + BOOKING WRAPPER */
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0,1.1fr) minmax(0,1.1fr);
+      gap: 16px;
+    }
+    @media (max-width: 900px) {
+      .hero { flex-direction: column; align-items: flex-start; }
+      .hero-right { align-items: flex-start; text-align: left; margin-top: 10px; }
+      .two-col { grid-template-columns: minmax(0,1fr); }
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.96);
+      border-radius: 22px;
+      padding: 16px 18px 18px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.22);
+    }
+    .panel h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    /* INFO PANEL */
+    .info-section { font-size: 0.9rem; }
+    .info-block {
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #eee;
+    }
+    .info-label {
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: #777;
+    }
+    .info-value { margin-top: 2px; }
+    .address-link {
+      color: #1565c0;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .address-link:hover { text-decoration: underline; }
+    .services-list {
+      list-style: none;
+      margin-top: 4px;
+    }
+    .services-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+    }
+    .hours-grid {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 2px 10px;
+      margin-top: 4px;
+    }
+
+    /* BOOKING PANEL */
+    .booking-header {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .booking-header h2 {
+      font-size: 1.1rem;
+      color: #333;
+    }
+    .slots {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin: 10px 0 6px;
+      gap: 6px;
+    }
+    .slot {
+      padding: 8px 14px;
+      border-radius: 16px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor:pointer;
+      min-width: 70px;
+      text-align:center;
+      border: none;
+      transition: transform .15s, box-shadow .15s, opacity .15s;
+    }
+    .slot.available {
+      background: linear-gradient(45deg,#4caf50,#2e7d32);
+      color:#fff;
+      box-shadow: 0 8px 20px rgba(76,175,80,0.5);
+    }
+    .slot.reserved {
+      background: linear-gradient(45deg,#ffb300,#fb8c00);
+      color:#fff;
+    }
+    .slot.paid {
+      background: linear-gradient(45deg,#2e7d32,#1b5e20);
+      color:#fff;
+    }
+    .slot:active { transform: scale(0.95); }
+
+    .dropin-banner {
+      text-align:center;
+      background: rgba(0,0,0,0.7);
+      color:#fff;
+      border-radius:16px;
+      padding:10px;
+      font-size:0.9rem;
+      margin-top:4px;
+    }
+
+    /* FORM */
+    .form {
+      margin-top: 10px;
+      border-top: 1px dashed #eee;
+      padding-top: 8px;
+    }
+    .form label {
+      display:block;
+      margin-top: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color:#555;
+    }
+    .form input, .form select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-top: 3px;
+      font-size: 0.9rem;
+    }
+    .form button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 999px;
+      border:none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor:pointer;
+      background: linear-gradient(45deg,#ffd700,#ffa000);
+      box-shadow: 0 10px 24px rgba(255,193,7,0.6);
+    }
+    .warning {
+      margin-top: 6px;
+      font-size: 0.75rem;
+      background: linear-gradient(45deg,#ff9800,#f57c00);
+      color:#fff;
+      padding: 6px 8px;
+      border-radius: 10px;
+    }
+    .swish-block {
+      margin-top: 6px;
+      font-size: 0.8rem;
+      text-align:center;
+    }
+    .swish-qr {
+      max-width:120px;
+      border-radius:12px;
+      margin-top:4px;
+    }
+
+    /* BOOKINGS LIST */
+    .bookings-list {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+    .booking-item {
+      padding: 6px 8px;
+      margin-bottom: 4px;
+      border-radius: 10px;
+      background:#fff4e0;
+    }
+    .booking-status {
+      float:right;
+      font-weight: 600;
+      color:#f57c00;
+    }
+    .booking-status.paid { color:#2e7d32; }
+
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-left">
+      <div class="brand-title">SALON GOLDEN FINGERS</div>
+      <div class="brand-sub">Mariestadsvägen 86, 549 56 Skövde</div>
+      <div class="hero-badges">
+        <span class="badge">✂️ Klippning & skägg</span>
+        <span class="badge">📅 Boka online · Drop‑in fre–lör</span>
+        <span class="badge">💈 Herrsalong</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="contact-line">📞 Telefon: <strong>+46 72 444 41 01</strong></div>
+      <div class="contact-actions">
+        <button class="btn btn-call" onclick="window.location.href='tel:+46724444101'">Ring</button>
+        <button class="btn btn-wa" onclick="window.location.href='https://wa.me/46724444101'">WhatsApp</button>
+        <button class="btn btn-mail" onclick="window.location.href='mailto:omar1tftnaze@gmail.com'">E‑post</button>
+      </div>
+      <button class="lang-toggle" onclick="toggleLang()">SV / AR</button>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <div class="two-col">
+    <!-- INFO PANEL -->
+    <section class="panel info-section">
+      <h3 id="infoTitle">Salongsinfo</h3>
+
+      <div class="info-block">
+        <div class="info-label">Adress</div>
+        <div class="info-value">
+          <a class="address-link"
+             href="https://www.google.com/maps/search/?api=1&query=SALON+GOLDEN+FINGERS%2C+Mariestadsv%C3%A4gen+86%2C+549+56+Sk%C3%B6vde"
+             target="_blank">
+            SALON GOLDEN FINGERS, Mariestadsvägen 86, 549 56 Skövde
+          </a>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-label">Öppettider</div>
+        <div class="hours-grid">
+          <span>Mån–Tor:</span><span>10:00 – 18:00</span>
+          <span>Fre–Lör:</span><span>Drop‑in (kö‑system)</span>
+          <span>Sön:</span><span>Stängt</span>
+        </div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-label">Tjänster</div>
+        <ul class="services-list">
+          <li><span>Klippning</span><span>250 SEK</span></li>
+          <li><span>Skäggtrimning</span><span>250 SEK</span></li>
+        </ul>
+      </div>
+
+      <div class="info-block">
+        <div class="info-label">Notis</div>
+        <div class="info-value">
+          Onlinebokning gäller endast söndag–torsdag. Fredag & lördag kör vi endast drop‑in i salongen.
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKING PANEL -->
+    <section class="panel">
+      <div class="booking-header">
+        <h2 id="bookingTitle">Boka tid idag (max 8 tider)</h2>
+        <div id="weekInfo" style="font-size:0.8rem;color:#666;margin-top:2px;">
+          Onlinebokning aktiv sön–tor. Fre–lör endast drop‑in.
+        </div>
+      </div>
+
+      <div id="slotsWrapper">
+        <div id="slots" class="slots"></div>
+      </div>
+
+      <div id="dropinInfo" class="dropin-banner" style="display:none;">
+        Fre & lör: Endast drop‑in (kö‑system) i salongen. Ingen onlinebokning dessa dagar.
+      </div>
+
+      <div id="bookingForm" class="form">
+        <label for="name">Namn</label>
+        <input id="name" type="text" placeholder="Fullt namn">
+        <label for="phone">Telefon</label>
+        <input id="phone" type="tel" placeholder="+46...">
+        <label for="email">E‑post</label>
+        <input id="email" type="email" placeholder="kund@mail.se">
+        <label for="service">Tjänst</label>
+        <select id="service">
+          <option value="250-klippning">Klippning – 250 SEK</option>
+          <option value="250-skagg">Skäggtrimning – 250 SEK</option>
+        </select>
+        <button type="button" onclick="bookAndPay()">
+          ✅ Boka & betala med Swish
+        </button>
+        <div class="warning">
+          ⚠️ Avbokning: Ingen återbetalning. Vid avbokning förloras hela beloppet.
+        </div>
+        <div class="swish-block">
+          Swish: <strong>1236112585</strong><br>
+          <img class="swish-qr"
+               src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=SWISH:1236112585"
+               alt="Swish QR">
+        </div>
+      </div>
+
+      <div style="margin-top:10px;border-top:1px dashed #eee;padding-top:6px;">
+        <strong>📅 Dagens bokningar</strong>
+        <div id="bookingList" class="bookings-list"></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+  // EmailJS init
+  emailjs.init("RdqnDhUxmbBR69lCQ"); // public key [web:39]
+
+  const SERVICE_ID   = "service_osd1mqu";
+  const TEMPLATE_ID  = "template_erd8bqc";
+  const SALON_EMAIL  = "omar1tftnaze@gmail.com";
+  const SWISH_NUMBER = "1236112585";
+
+  let lang = "sv";
+  const slots = ["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00"];
+  let selectedTime = null;
+  let bookings = JSON.parse(localStorage.getItem("gf_bookings") || "[]");
+
+  function saveBookings() {
+    localStorage.setItem("gf_bookings", JSON.stringify(bookings));
+  }
+
+  function toggleLang() {
+    lang = lang === "sv" ? "ar" : "sv";
+    document.getElementById("infoTitle").textContent =
+      lang === "sv" ? "Salongsinfo" : "معلومات الصالون";
+    document.getElementById("bookingTitle").textContent =
+      lang === "sv" ? "Boka tid idag (max 8 tider)" : "احجز موعد اليوم (حتى ٨ مواعيد)";
+    document.getElementById("weekInfo").textContent =
+      lang === "sv"
+        ? "Onlinebokning aktiv sön–tor. Fre–lör endast drop‑in."
+        : "الحجز أونلاين متاح من الأحد إلى الخميس. الجمعة والسبت نظام دور في الصالون فقط.";
+  }
+
+  function isWeekend() {
+    const d = new Date();
+    const day = d.getDay(); // 0=Sun, 5=Fri, 6=Sat [web:53]
+    return day === 5 || day === 6;
+  }
+
+  function initSlots() {
+    const slotsDiv   = document.getElementById("slots");
+    const dropinInfo = document.getElementById("dropinInfo");
+    const form       = document.getElementById("bookingForm");
+    const todayStr   = new Date().toISOString().split("T")[0];
+
+    if (isWeekend()) {
+      slotsDiv.innerHTML = "";
+      form.style.display = "none";
+      dropinInfo.style.display = "block";
+      updateBookingList();
+      return;
+    } else {
+      dropinInfo.style.display = "none";
+      form.style.display = "block";
+    }
+
+    slotsDiv.innerHTML = "";
+    const todays = bookings.filter(b => b.date === todayStr);
+    slots.forEach(time => {
+      const b = todays.find(x => x.time === time);
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "slot";
+      let cls = "available";
+      let label = time;
+
+      if (b) {
+        cls = "reserved";           // نعتبرها محجوزة (غير قابلة للحجز)
+        label = time;
+      } else {
+        btn.onclick = () => selectSlot(time);
+      }
+      btn.classList.add(cls);
+      btn.textContent = label;
+      slotsDiv.appendChild(btn);
+    });
+
+    updateBookingList();
+  }
+
+  function selectSlot(time) {
+    selectedTime = time;
+    document.getElementById("bookingForm").scrollIntoView({behavior:"smooth"});
+  }
+
+  function bookAndPay() {
+    const name  = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const serviceVal = document.getElementById("service").value;
+
+    if (!selectedTime || !name || !phone || !email) {
+      alert(lang === "sv" ? "Fyll i alla fält och välj tid." : "املا كل الحقول واختر وقتاً.");
+      return;
+    }
+
+    const [priceStr,type] = serviceVal.split("-");
+    const price   = parseInt(priceStr,10);
+    const service = type === "skagg" ? "Skäggtrimning 250 SEK" : "Klippning 250 SEK";
+
+    const todayStr = new Date().toISOString().split("T")[0];
+    const existing = bookings.find(b => b.date === todayStr && b.time === selectedTime);
+    if (existing) {
+      alert("Tiden är redan reserverad.");
+      initSlots();
+      return;
+    }
+
+    const booking = {
+      id: Date.now(),
+      date: todayStr,
+      time: selectedTime,
+      name,
+      phone,
+      email,
+      price,
+      service,
+      status: "reserved",
+      reminded: false
+    };
+    bookings.push(booking);
+    saveBookings();
+
+    sendEmails(booking);   // إلك وللزبون [web:113]
+
+    alert(`Din tid ${booking.time} är reserverad.
+Betala ${booking.price} SEK till Swish ${SWISH_NUMBER}.`);
+
+    openSwish(booking);    // محاولة فتح Swish [web:92]
+
+    document.getElementById("name").value  = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("service").value = "250-klippning";
+    selectedTime = null;
+    initSlots();
+  }
+
+  function sendEmails(booking) {
+    const baseMessage = `
+Namn: ${booking.name}
+Telefon: ${booking.phone}
+Tid: ${booking.time}
+Tjänst: ${booking.service}
+Pris: ${booking.price} SEK
+Datum: ${booking.date}
+    `;
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+      to_email: SALON_EMAIL,
+      name: booking.name,
+      phone: booking.phone,
+      time: booking.time,
+      price: booking.price,
+      message: "NY BOKNING!
+" + baseMessage + "
+SALON GOLDEN FINGERS, Skövde."
+    });
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+      to_email: booking.email,
+      name: booking.name,
+      phone: booking.phone,
+      time: booking.time,
+      price: booking.price,
+      message:
+        `Tack ${booking.name}!
+` +
+        baseMessage +
+        `
+Swish: ${SWISH_NUMBER}
+Viktigt: Ingen återbetalning vid avbokning.`
+    });
+  }
+
+  function openSwish(booking) {
+    const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+    const amount   = booking.price;
+
+    if (isMobile) {
+      const url = `swish://payment?number=${SWISH_NUMBER}&amount=${amount}`;
+      window.location.href = url;
+    } else {
+      window.open(
+        `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=SWISH:${SWISH_NUMBER}`,
+        "_blank"
+      );
+    }
+  }
+
+  function updateBookingList() {
+    const list = document.getElementById("bookingList");
+    const todayStr = new Date().toISOString().split("T")[0];
+    const todays = bookings.filter(b => b.date === todayStr);
+
+    if (!todays.length) {
+      list.innerHTML = "<p style='color:#777;font-style:italic;'>Inga bokningar idag.</p>";
+      return;
+    }
+
+    list.innerHTML = todays.map(b => `
+      <div class="booking-item">
+        <span>${b.time} – ${b.name} (${b.service}) ${b.price} SEK</span>
+        <span class="booking-status">Obetald</span>
+      </div>
+    `).join("");
+  }
+
+  // تذكير داخلي 30 دقيقة (للمستقبل)
+  setInterval(() => {
+    const now = new Date();
+    bookings.forEach(b => {
+      const t = new Date(`${b.date}T${b.time}:00`);
+      const diff = t - now;
+      if (diff > 0 && diff <= 30*60*1000 && !b.reminded) {
+        console.log(`Påminnelse 30 min: ${b.name} ${b.time}`);
+        b.reminded = true;
+        saveBookings();
+      }
+    });
+  }, 60000);
+
+  initSlots();
+</script>
 </body>
 </html>
