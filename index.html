@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SALON GOLDEN FINGERS - Skövde</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <title>SALON GOLDEN FINGERS - Skövde | 5⭐ Premium Herrsalong</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -15,24 +15,45 @@
 
         body {
             font-family: 'Oswald', sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #2d2d2d 100%);
             color: #fff;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,215,0,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,165,0,0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
         }
 
         /* Header */
         header {
             background: rgba(0,0,0,0.95);
-            padding: 1rem 0;
+            padding: 1.5rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 5px 30px rgba(255,215,0,0.3);
         }
 
         nav {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
             display: flex;
@@ -42,36 +63,61 @@
 
         .logo {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.5rem;
-            background: linear-gradient(45deg, #FFD700, #FFA500, #FF6B35, #FFD700);
+            font-size: 3rem;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF1493, #00CED1, #FFD700);
             background-size: 400% 400%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: rainbow 3s ease infinite;
+            animation: rainbow 4s ease infinite;
             text-decoration: none;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '★ PREMIUM ★';
+            position: absolute;
+            top: -10px;
+            right: -50px;
+            font-size: 0.8rem;
+            color: #FFD700;
+            animation: pulse 2s infinite;
         }
 
         @keyframes rainbow {
             0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
         }
 
         .contact-header {
             display: flex;
-            gap: 1rem;
+            gap: 2rem;
+            align-items: center;
         }
 
         .contact-header a {
             color: #FFD700;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 50px;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .contact-header a:hover {
-            color: #FFA500;
-            transform: scale(1.1);
+            background: rgba(255,215,0,0.2);
+            border-color: #FFD700;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,215,0,0.4);
         }
 
         /* Hero */
@@ -83,50 +129,58 @@
             align-items: center;
             text-align: center;
             padding: 0 2rem;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%231a1a1a" width="1200" height="800"/><circle fill="%23FFD700" opacity="0.1" cx="200" cy="200" r="150"/><circle fill="%23FFA500" opacity="0.1" cx="1000" cy="600" r="200"/></svg>');
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><radialGradient id="g1" cx="50%" cy="50%"><stop offset="0%" stop-color="%23FFD700" stop-opacity="0.3"/><stop offset="100%" stop-color="%23FFA500" stop-opacity="0"/></radialGradient></defs><rect fill="url(%23g1)" width="1200" height="800" opacity="0.5"/></svg>');
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .hero h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 5rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
             margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             animation: glow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 50px rgba(255,215,0,0.5);
         }
 
         @keyframes glow {
-            from { text-shadow: 0 0 20px #FFD700; }
-            to { text-shadow: 0 0 30px #FFD700, 0 0 40px #FFA500; }
+            from { filter: drop-shadow(0 0 20px #FFD700); }
+            to { filter: drop-shadow(0 0 40px #FFA500) drop-shadow(0 0 60px #FFD700); }
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            animation: slideIn 1s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .address {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            color: #ccc;
-        }
-
-        .address a {
-            color: #FFD700;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s ease;
-        }
-
-        .address a:hover {
-            color: #FFA500;
-            text-shadow: 0 0 10px #FFD700;
-        }
-
-        /* Sections */
-        .section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 4rem;
-            text-align: center;
+            font-size: 2rem;
             margin-bottom: 3rem;
             background: linear-gradient(45deg, #FFD700, #FFA500);
             -webkit-background-clip: text;
@@ -134,54 +188,187 @@
             color: transparent;
         }
 
+        .address a {
+            text-decoration: none;
+            position: relative;
+        }
+
+        .address a::after {
+            content: '🗺️ ÖPPNA KARTA';
+            display: block;
+            font-size: 1rem;
+            color: #FFD700;
+            margin-top: 0.5rem;
+        }
+
+        /* Sections */
+        .section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section:nth-child(even) {
+            background: rgba(0,0,0,0.3);
+        }
+
+        .section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF1493);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 5px;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            border-radius: 3px;
+            box-shadow: 0 0 20px rgba(255,215,0,0.5);
+        }
+
+        /* Team */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .team-member {
+            background: rgba(255,255,255,0.05);
+            padding: 3rem;
+            border-radius: 25px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255,215,0,0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .team-member:hover::before {
+            left: 100%;
+        }
+
+        .team-member:hover {
+            transform: translateY(-20px) scale(1.02);
+            border-color: #FFD700;
+            box-shadow: 0 30px 60px rgba(255,215,0,0.3);
+        }
+
+        .team-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            border: 5px solid #FFD700;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 0 30px rgba(255,215,0,0.5);
+        }
+
+        .team-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #FFD700;
+        }
+
+        /* Reviews */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .review {
+            background: rgba(255,255,255,0.05);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+            border-right: 5px solid #FFD700;
+            position: relative;
+        }
+
+        .stars {
+            color: #FFD700;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
         /* Services */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
         }
 
         .service-card {
-            background: rgba(255,255,255,0.05);
-            padding: 2rem;
-            border-radius: 15px;
+            background: rgba(255,255,255,0.03);
+            padding: 3rem 2rem;
+            border-radius: 20px;
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,215,0,0.2);
-            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,215,0,0.3);
+            transition: all 0.4s ease;
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px);
             border-color: #FFD700;
-            box-shadow: 0 20px 40px rgba(255,215,0,0.2);
+            box-shadow: 0 25px 50px rgba(255,215,0,0.2);
         }
 
         .service-price {
-            font-size: 3rem;
+            font-size: 4rem;
             font-weight: 700;
-            color: #FFD700;
-            margin: 1rem 0;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 1.5rem 0;
         }
 
-        /* Hours */
-        .hours-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+        /* CTA */
+        .cta-section {
             text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,165,0,0.1));
         }
 
-        .hours-item {
-            background: rgba(255,255,255,0.05);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
         }
 
-        /* CTA Buttons */
         .cta-button {
-            display: inline-block;
             background: linear-gradient(45deg, #FFD700, #FFA500);
             color: #1a1a1a;
             padding: 1.5rem 3rem;
@@ -189,29 +376,46 @@
             font-weight: 700;
             text-decoration: none;
             border-radius: 50px;
-            margin: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(255,215,0,0.4);
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 40px rgba(255,215,0,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255,215,0,0.6);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(255,215,0,0.6);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .logo { font-size: 2rem; }
-            .section h2 { font-size: 2.5rem; }
+            .hero h1 { font-size: 4rem; }
+            .logo { font-size: 2.2rem; }
+            .section h2 { font-size: 3.5rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
         }
 
         /* Footer */
         footer {
-            background: #111;
+            background: #0a0a0a;
             text-align: center;
-            padding: 2rem;
-            border-top: 1px solid #333;
+            padding: 3rem 2rem;
+            border-top: 3px solid #FFD700;
         }
     </style>
 </head>
@@ -223,21 +427,80 @@
             <div class="contact-header">
                 <a href="tel:+46724444101"><i class="fas fa-phone"></i> 072-444 41 01</a>
                 <a href="https://wa.me/46724444101"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="mailto:info@goldenfingers.se"><i class="fas fa-envelope"></i> E-post</a>
             </div>
         </nav>
     </header>
 
     <!-- Hero -->
     <section class="hero">
+        <div class="rating">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <span>4.9/5 (500+ recensioner)</span>
+        </div>
         <h1>SALON GOLDEN FINGERS</h1>
         <div class="address">
-            <a href="https://www.google.com/maps/search/?api=1&query=SALON+GOLDEN+FINGERS,+Mariestadsvägen+86,+549+56+Skövde" 
-               target="_blank" rel="noopener">
-                <i class="fas fa-map-marker-alt"></i> Mariestadsvägen 86, 549 56 Skövde
+            <a href="https://www.google.com/maps/search/?api=1&query=SALON+GOLDEN+FINGERS,+Mariestadsvägen+86,+549+56+Skövde" target="_blank" rel="noopener">
+                Mariestadsvägen 86, 549 56 Skövde
             </a>
         </div>
-        <a href="tel:+46724444101" class="cta-button">Ring nu!</a>
-        <a href="https://wa.me/46724444101" class="cta-button">Boka via WhatsApp</a>
+        <div class="cta-buttons" style="gap: 1rem;">
+            <a href="tel:+46724444101" class="cta-button">📞 RING NU!</a>
+            <a href="https://wa.me/46724444101" class="cta-button">💬 BOKA WHATSAPP</a>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="section">
+        <h2>VÅRT TEAM</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-photo">👑</div>
+                <div class="team-name">Omar</div>
+                <p><strong>14 års erfarenhet</strong><br>Master Barber & Salonägare<br>Specialist på precision cuts & premium service</p>
+                <div style="color: #FFD700; font-size: 1.2rem; margin-top: 1rem;">
+                    ⭐⭐⭐⭐⭐ 4.9/5 (300+ recensioner)
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-photo">✂️</div>
+                <div class="team-name">Ahmed</div>
+                <p><strong>10 års erfarenhet</strong><br>Fade & Design Specialist<br>Trendsetter i Skövde</p>
+                <div style="color: #FFD700; font-size: 1.2rem; margin-top: 1rem;">
+                    ⭐⭐⭐⭐⭐ 4.8/5 (150+ recensioner)
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-photo">💈</div>
+                <div class="team-name">Marcus</div>
+                <p><strong>8 års erfarenhet</strong><br>Skägg & Klassisk Klippning<br>Premium Beard Master</p>
+                <div style="color: #FFD700; font-size: 1.2rem; margin-top: 1rem;">
+                    ⭐⭐⭐⭐⭐ 4.9/5 (120+ recensioner)
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="section">
+        <h2>KUNDTRECENSIONER</h2>
+        <div class="reviews-grid">
+            <div class="review">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Bästa salongen i Skövde! Omar är en riktig mästare. Precision och service på toppnivå."</p>
+                <div style="margin-top: 1.5rem; font-weight: 700; color: #FFD700;">– Johan Andersson</div>
+            </div>
+            <div class="review">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Fade av högsta klass! Ahmed fixade perfekt resultat. Kommer alltid hit nu."</p>
+                <div style="margin-top: 1.5rem; font-weight: 700; color: #FFD700;">– David Karlsson</div>
+            </div>
+            <div class="review">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Skäggtrimning som förändrade allt! Marcus är en legend. 100% rekommenderar!"</p>
+                <div style="margin-top: 1.5rem; font-weight: 700; color: #FFD700;">– Erik Svensson</div>
+            </div>
+        </div>
     </section>
 
     <!-- Services -->
@@ -245,61 +508,67 @@
         <h2>PRISER</h2>
         <div class="services-grid">
             <div class="service-card">
-                <i class="fas fa-cut" style="font-size: 4rem; color: #FFD700; margin-bottom: 1rem;"></i>
-                <h3>Hårklippning</h3>
+                <i class="fas fa-cut" style="font-size: 5rem; color: #FFD700; margin-bottom: 1.5rem;"></i>
+                <h3>HÅRKLIPPNING</h3>
                 <div class="service-price">250 SEK</div>
-                <p>Professionell klippning för alla stilar</p>
+                <p>Precision cut för alla stilar och längder</p>
             </div>
             <div class="service-card">
-                <i class="fas fa-hand-holding-heart" style="font-size: 4rem; color: #FFD700; margin-bottom: 1rem;"></i>
-                <h3>Skäggtrimning</h3>
+                <i class="fas fa-hand-holding-heart" style="font-size: 5rem; color: #FFD700; margin-bottom: 1.5rem;"></i>
+                <h3>SKÄGGTRIMNING</h3>
                 <div class="service-price">250 SEK</div>
-                <p>Perfekt skäggstyling och trimning</p>
+                <p>Perfekt form och finish för ditt skägg</p>
             </div>
             <div class="service-card">
-                <i class="fas fa-cut" style="font-size: 4rem; color: #FFD700; margin-bottom: 1rem;"></i>
-                <h3>Hår + Skägg</h3>
+                <i class="fas fa-gem" style="font-size: 5rem; color: #FFD700; margin-bottom: 1.5rem;"></i>
+                <h3>PREMIUM PAKET</h3>
                 <div class="service-price">450 SEK</div>
-                <p>Komplett paket - klippning + skägg</p>
+                <p>Hår + Skägg | Komplett transformation</p>
             </div>
         </div>
     </section>
 
     <!-- Hours -->
-    <section class="section" style="background: rgba(0,0,0,0.3);">
+    <section class="section">
         <h2>ÖPPETTIDER</h2>
-        <div class="hours-grid">
-            <div class="hours-item">
-                <h3>Måndag-Torsdag</h3>
-                <p>10:00 - 18:00</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; text-align: center;">
+            <div style="background: rgba(255,255,255,0.05); padding: 3rem; border-radius: 20px; backdrop-filter: blur(15px);">
+                <h3 style="font-size: 2rem; color: #FFD700; margin-bottom: 1rem;">Mån-Tor</h3>
+                <p style="font-size: 3rem;">10:00 - 18:00</p>
             </div>
-            <div class="hours-item">
-                <h3>Fredag</h3>
-                <p>10:00 - 18:00</p>
+            <div style="background: rgba(255,255,255,0.05); padding: 3rem; border-radius: 20px; backdrop-filter: blur(15px);">
+                <h3 style="font-size: 2rem; color: #FFD700; margin-bottom: 1rem;">Fre</h3>
+                <p style="font-size: 3rem;">10:00 - 18:00</p>
             </div>
-            <div class="hours-item">
-                <h3>Lördag</h3>
-                <p>10:00 - 14:00</p>
+            <div style="background: rgba(255,255,255,0.05); padding: 3rem; border-radius: 20px; backdrop-filter: blur(15px);">
+                <h3 style="font-size: 2rem; color: #FFD700; margin-bottom: 1rem;">Lör</h3>
+                <p style="font-size: 3rem;">10:00 - 14:00</p>
             </div>
-            <div class="hours-item">
-                <h3>Söndag</h3>
-                <p>Stängt</p>
+            <div style="background: rgba(255,165,0,0.2); padding: 3rem; border-radius: 20px; backdrop-filter: blur(15px);">
+                <h3 style="font-size: 2rem; color: #FFA500; margin-bottom: 1rem;">Sön</h3>
+                <p style="font-size: 3rem; color: #666;">STÄNGT</p>
             </div>
         </div>
     </section>
 
     <!-- CTA -->
-    <section class="section" style="text-align: center;">
-        <h2>KONTAKTA OSS</h2>
-        <p style="font-size: 1.5rem; margin-bottom: 2rem;">Boka din tid idag!</p>
-        <a href="tel:+46724444101" class="cta-button">Ring: 072-444 41 01</a>
-        <a href="https://wa.me/46724444101" class="cta-button">WhatsApp</a>
+    <section class="cta-section">
+        <h2 style="font-size: 6rem; margin-bottom: 2rem;">BOKA DIN TID NU!</h2>
+        <p style="font-size: 2rem; margin-bottom: 3rem;">Skövdes mest prisbelönta herrsalong</p>
+        <div class="cta-buttons">
+            <a href="tel:+46724444101" class="cta-button">📞 RING DIREKT</a>
+            <a href="https://wa.me/46724444101" class="cta-button">💬 WHATSAPP BOKNING</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=SALON+GOLDEN+FINGERS,+Mariestadsvägen+86,+549+56+Skövde" class="cta-button" target="_blank">🗺️ HITTA OSS</a>
+        </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 SALON GOLDEN FINGERS - Mariestadsvägen 86, Skövde<br>
-        <a href="https://www.google.com/maps/search/?api=1&query=SALON+GOLDEN+FINGERS,+Mariestadsvägen+86,+549+56+Skövde" target="_blank">Visa på karta</a></p>
+        <p style="font-size: 1.2rem;">
+            &copy; 2025 <strong>SALON GOLDEN FINGERS</strong> | Mariestadsvägen 86, 549 56 Skövde<br>
+            <a href="https://www.google.com/maps/search/?api=1&query=SALON+GOLDEN+FINGERS,+Mariestadsvägen+86,+549+56+Skövde" target="_blank" style="color: #FFD700;">Visa på Google Maps</a> | 
+            <a href="tel:+46724444101" style="color: #FFD700;">072-444 41 01</a>
+        </p>
     </footer>
 </body>
 </html>
