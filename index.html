@@ -1,119 +1,202 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SALON GOLDEN FINGERS - Skövde</title>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Oswald',sans-serif;background:linear-gradient(135deg,#0f0f0f 0%,#1a1a1a 50%,#2d2d2d 100%);color:#fff;overflow-x:hidden}
-        header{background:rgba(0,0,0,0.95);padding:1rem 0;position:fixed;width:100%;top:0;z-index:1000;backdrop-filter:blur(20px);box-shadow:0 5px 30px rgba(255,215,0,0.3)}
-        nav{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center}
-        .logo{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;background:linear-gradient(45deg,#FFD700,#FFA500);-webkit-background-clip:text;background-clip:text;color:transparent;text-decoration:none}
-        .contact-header a{color:#FFD700;margin-left:1rem;font-size:1.1rem;text-decoration:none}
-        .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:80px}
-        .hero h1{font-family:'Bebas Neue',sans-serif;font-size:5rem;background:linear-gradient(45deg,#FFD700,#FFA500);-webkit-background-clip:text;background-clip:text;margin-bottom:1rem}
-        .rating{font-size:1.8rem;color:#FFD700;margin-bottom:1rem}
-        .address{font-size:1.8rem;margin-bottom:2rem}
-        .address a{color:#FFD700;text-decoration:none;font-weight:700}
-        .section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
-        .section h2{font-family:'Bebas Neue',sans-serif;font-size:4rem;text-align:center;margin-bottom:3rem;background:linear-gradient(45deg,#FFD700,#FFA500);-webkit-background-clip:text;background-clip:text}
-        .omar{text-align:center;background:rgba(255,255,255,0.05);padding:4rem;border-radius:20px;backdrop-filter:blur(10px);margin-bottom:3rem;border:2px solid rgba(255,215,0,0.3)}
-        .omar-photo{width:250px;height:250px;border-radius:50%;margin:0 auto 2rem;background:linear-gradient(45deg,#FFD700,#FFA500);display:flex;align-items:center;justify-content:center;font-size:6rem;border:5px solid #FFD700;box-shadow:0 0 30px rgba(255,215,0,0.5)}
-        .omar-name{font-size:3rem;color:#FFD700;margin-bottom:1rem;font-family:'Bebas Neue',sans-serif}
-        .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
-        .service-card{background:rgba(255,255,255,0.05);padding:2.5rem;border-radius:15px;text-align:center;border:1px solid rgba(255,215,0,0.3);transition:all .3s}
-        .service-card:hover{transform:translateY(-10px);border-color:#FFD700;box-shadow:0 20px 40px rgba(255,215,0,0.2)}
-        .service-price{font-size:3rem;color:#FFD700;font-weight:700;margin:1rem 0}
-        .booking{background:linear-gradient(135deg,rgba(255,215,0,0.1),rgba(255,165,0,0.1));padding:4rem 2rem;border-radius:20px;margin:3rem 0;border:3px solid #FFD700}
-        .booking h3{font-size:2.5rem;color:#FFD700;margin-bottom:2rem;text-align:center;font-family:'Bebas Neue',sans-serif}
-        .form-group{margin-bottom:1.5rem}
-        .form-group label{display:block;margin-bottom:.5rem;font-weight:700;color:#FFD700}
-        .form-group input,.form-group select{width:100%;padding:1rem;border:2px solid rgba(255,215,0,0.3);border-radius:10px;background:rgba(255,255,255,0.1);color:#fff;font-size:1rem}
-        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}@media (max-width:768px){.form-row{grid-template-columns:1fr}}
-        .slots-container{margin-top:2rem}
-        .slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1rem}
-        .slot{padding:1.5rem;text-align:center;border-radius:10px;cursor:pointer;transition:all .3s;font-weight:700;font-size:1.1rem}
-        .slot.available{background:rgba(76,175,80,0.3);color:#4CAF50;border:2px solid #4CAF50}
-        .slot.booked{background:rgba(244,67,54,0.3);color:#f44336;border:2px solid #f44336;cursor:not-allowed}
-        .slot.available:hover{background:rgba(76,175,80,0.5);transform:scale(1.05)}
-        button{background:linear-gradient(45deg,#FFD700,#FFA500);color:#1a1a1a;padding:1.5rem;font-size:1.3rem;font-weight:700;border:none;border-radius:50px;cursor:pointer;width:100%;transition:all .3s;box-shadow:0 10px 30px rgba(255,215,0,0.4);font-family:'Bebas Neue',sans-serif;margin-top:2rem}
-        button:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 15px 40px rgba(255,215,0,0.6)}
-        button:disabled{opacity:.5;cursor:not-allowed}
-        .swish-info{background:rgba(255,215,0,0.2);padding:1.5rem;border-radius:10px;margin-top:1rem;text-align:center;border:2px solid #FFD700;display:none}
-        .success{background:#4CAF50;color:white;padding:3rem;border-radius:20px;text-align:center;display:none;margin-top:2rem;animation:slideIn .5s ease}
-        @keyframes slideIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-        .reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2rem;margin-top:3rem}
-        .review{background:rgba(255,255,255,0.05);padding:2rem;border-radius:15px;border-right:4px solid #FFD700}
-        .stars{color:#FFD700;font-size:1.5rem;margin-bottom:1rem}
-        .hours-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;text-align:center;margin-top:3rem}
-        .hours-item{background:rgba(255,255,255,0.05);padding:2rem;border-radius:15px;border:1px solid rgba(255,215,0,0.3)}
-        footer{background:#0a0a0a;text-align:center;padding:2rem;border-top:3px solid #FFD700;margin-top:4rem}
-        @media (max-width:768px){.hero h1{font-size:3.5rem}.logo{font-size:2rem}.section h2{font-size:3rem}}
-    </style>
+<meta charset="UTF-8">
+<title>Golden Fingera | Luxury Barber - Skövde</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+(function(){
+  emailjs.init("YOUR_PUBLIC_KEY"); // تحطه من EmailJS
+})();
+</script>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #000;
+  color: #fff;
+}
+header {
+  padding: 30px;
+  text-align: center;
+  border-bottom: 1px solid #bfa76f;
+}
+header h1 {
+  font-family: 'Playfair Display', serif;
+  color: #d4af37;
+  letter-spacing: 2px;
+}
+section {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+h2 {
+  color: #d4af37;
+  text-align: center;
+}
+.services, .contact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 20px;
+}
+.card {
+  border: 1px solid #bfa76f;
+  padding: 20px;
+  text-align: center;
+}
+.price {
+  font-size: 24px;
+  color: #d4af37;
+}
+input, select, button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  background: #111;
+  border: 1px solid #bfa76f;
+  color: #fff;
+}
+button {
+  background: #d4af37;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #bfa76f;
+}
+.notice {
+  color: #ff5555;
+  text-align: center;
+}
+</style>
 </head>
+
 <body>
-    <header>
-        <nav>
-            <a href="#" class="logo">SALON GOLDEN FINGERS</a>
-            <div class="contact-header">
-                <a href="tel:+46724444101"><i class="fas fa-phone"></i> 072-444 41 01</a>
-                <a href="https://wa.me/46724444101"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-            </div>
-        </nav>
-    </header>
 
-    <section class="hero">
-        <div class="rating">⭐⭐⭐⭐⭐ 4.9/5 (350+ kunder)</div>
-        <h1>SALON GOLDEN FINGERS</h1>
-        <div class="address">
-            <a href="https://www.google.com/maps/search/?api=1&query=SALON+GOLDEN+FINGERS,+Mariestadsvägen+86,+549+56+Sk%C3%B6vde" target="_blank">
-                <i class="fas fa-map-marker-alt"></i> Mariestadsvägen 86, 549 56 Skövde
-            </a>
-        </div>
-    </section>
+<header>
+  <h1>Golden Fingera</h1>
+  <p>Luxury Barber – Skövde</p>
+  <p>Owner: Omar | 14 Years Experience</p>
+</header>
 
-    <section class="section">
-        <div class="omar">
-            <div class="omar-photo">👑</div>
-            <h2 style="font-size:3rem;background:linear-gradient(45deg,#FFD700,#FFA500);-webkit-background-clip:text;background-clip:text">OMAR</h2>
-            <p style="font-size:1.5rem;margin-bottom:1rem"><strong>14 års erfarenhet</strong></p>
-            <div style="font-size:1.8rem;color:#FFD700">Master Barber | Skövdes Bästa</div>
-        </div>
-    </section>
+<section>
+  <h2>Services & Prices</h2>
+  <div class="services">
+    <div class="card">
+      <h3>Haircut</h3>
+      <p class="price">250 SEK</p>
+    </div>
+    <div class="card">
+      <h3>Beard Trim</h3>
+      <p class="price">250 SEK</p>
+    </div>
+    <div class="card">
+      <h3>Kids</h3>
+      <p class="price">250 SEK</p>
+    </div>
+  </div>
+</section>
 
-    <section class="section">
-        <h2>PRISER</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <i class="fas fa-cut" style="font-size:3rem;color:#FFD700;margin-bottom:1rem;display:block"></i>
-                <h3>Hårklippning</h3><div class="service-price">250 SEK</div>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-hand-holding-heart" style="font-size:3rem;color:#FFD700;margin-bottom:1rem;display:block"></i>
-                <h3>Skäggtrimning</h3><div class="service-price">250 SEK</div>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-gem" style="font-size:3rem;color:#FFD700;margin-bottom:1rem;display:block"></i>
-                <h3>Hår + Skägg</h3><div class="service-price">450 SEK</div>
-            </div>
-        </div>
-    </section>
+<section>
+  <h2>Book Appointment</h2>
+  <p class="notice" id="notice"></p>
+  <form id="bookingForm">
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="email" id="email" placeholder="Your Email" required>
+    <input type="tel" id="phone" placeholder="Phone Number" required>
 
-    <section class="section">
-        <div class="booking">
-            <h3>📅 BOKA DIN TID (8 platser/dag)</h3>
-            <form id="bookingForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Namn *</label>
-                        <input type="text" id="name" required placeholder="Ditt namn">
-                    </div>
-                    <div class="form-group">
-                        <label>Telefon *</label>
-                        <input type="tel" id="phone" required placeholder="072-XXX XX XX">
-                    </div>
-                </div>
-                <div class
+    <select id="service" required>
+      <option value="">Select Service</option>
+      <option>Haircut</option>
+      <option>Beard</option>
+      <option>Haircut & Beard</option>
+    </select>
+
+    <input type="date" id="date" required>
+    <select id="time" required></select>
+
+    <button type="submit">Confirm Booking</button>
+  </form>
+</section>
+
+<section>
+  <h2>Contact</h2>
+  <div class="contact">
+    <div class="card">
+      <p>📍 Maristasvägen 86<br>Skövde, Sweden</p>
+      <p>📞 072-444-4101</p>
+      <p>📧 omar1tftnaze@gmail.com</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Golden Fingera – All Rights Reserved
+</footer>
+
+<script>
+const dateInput = document.getElementById("date");
+const timeSelect = document.getElementById("time");
+const notice = document.getElementById("notice");
+
+dateInput.addEventListener("change", () => {
+  timeSelect.innerHTML = "";
+  const day = new Date(dateInput.value).getDay();
+
+  // Friday = 5, Saturday = 6
+  if (day === 5 || day === 6) {
+    notice.textContent = "No online booking on Friday & Saturday – Walk-in only.";
+    document.querySelector("button").disabled = true;
+    return;
+  }
+
+  notice.textContent = "";
+  document.querySelector("button").disabled = false;
+
+  for (let h = 10; h <= 17; h++) {
+    let option = document.createElement("option");
+    option.value = h + ":00";
+    option.textContent = h + ":00";
+    timeSelect.appendChild(option);
+  }
+});
+
+document.getElementById("bookingForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const params = {
+    name: name.value,
+    email: email.value,
+    phone: phone.value,
+    service: service.value,
+    date: date.value,
+    time: time.value
+  };
+
+  emailjs.send("service_osd1mqu", "template_erd8bqc", params)
+    .then(() => {
+      alert("Booking confirmed! Check your email.");
+      this.reset();
+    }, () => {
+      alert("Error sending booking. Try again.");
+    });
+});
+</script>
+
+</body>
+</html>
