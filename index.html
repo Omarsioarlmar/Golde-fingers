@@ -5,12 +5,10 @@
 <title>GOLDEN FINGERS | Luxury Barber – Skövde</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box}
-
+*{box-sizing:border-box;}
 body{
   margin:0;
   font-family:'Montserrat',sans-serif;
@@ -21,20 +19,33 @@ body{
 /* HEADER */
 header{
   text-align:center;
-  padding:90px 20px;
-  background:linear-gradient(to bottom,#ffffff,#e6e6e6);
-  border-bottom:2px solid #c9a24d;
+  padding:120px 20px;
+  background-image: url('your-photo.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  color:#fff;
+}
+header::after{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0; bottom:0;
+  background:rgba(0,0,0,0.4);
+}
+header h1, header p{
+  position: relative;
+  z-index: 1;
 }
 header h1{
   font-family:'Playfair Display',serif;
   font-size:56px;
   letter-spacing:6px;
-  color:#b08d2f;
   margin:0;
+  color:#FFD700;
 }
 header p{
   margin:10px 0;
-  color:#555;
+  color:#fff;
 }
 
 /* SECTION */
@@ -65,7 +76,7 @@ h2{
   box-shadow:0 20px 40px rgba(0,0,0,.15);
   transition:.3s;
 }
-.card:hover{transform:translateY(-6px)}
+.card:hover{transform:translateY(-6px);}
 .card .price{
   font-size:28px;
   color:#b08d2f;
@@ -101,7 +112,6 @@ form button{
   cursor:pointer;
 }
 form button:hover{background:#d4af37}
-
 .notice{
   text-align:center;
   color:#b00020;
@@ -167,7 +177,6 @@ footer{
 <section>
 <h2>Book Appointment</h2>
 <p class="notice" id="notice"></p>
-
 <form id="bookingForm">
   <input type="text" name="name" placeholder="Full Name" required>
   <input type="tel" name="phone" placeholder="Phone Number" required>
@@ -190,11 +199,8 @@ footer{
 <section>
 <h2>Contact</h2>
 <div class="contact">
-  📍 <a href="https://maps.google.com/?q=Maristasvägen+86+Skövde" target="_blank">
-  Maristasvägen 86 – Skövde</a>
-
+  📍 <a href="https://maps.google.com/?q=Maristasvägen+86+Skövde" target="_blank">Maristasvägen 86 – Skövde</a>
   📞 <a href="tel:+46724444101">072-444-4101</a>
-
   📧 <a href="mailto:omar1tftnaze@gmail.com">omar1tftnaze@gmail.com</a>
 </div>
 </section>
@@ -203,7 +209,6 @@ footer{
 © 2025 GOLDEN FINGERS – All Rights Reserved
 </footer>
 
-<!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
 emailjs.init("RdqnDhUxmbBR69lCQ");
