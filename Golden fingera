@@ -1,643 +1,228 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>SALON GOLDEN FINGERS – Herrsalong i Skövde</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="SALON GOLDEN FINGERS – herrklippning, skägg och stil i Skövde. Ny kund? Första klippning endast 99 kr." />
-  <style>
-    :root {
-      --bg-dark: #050608;
-      --bg-section: #101218;
-      --gold: #d4af37;
-      --gold-soft: #b08a2d;
-      --text-main: #f5f5f5;
-      --text-muted: #b3b3b3;
-      --accent-red: #c01f2f;
-      --max-width: 1100px;
-      --radius: 10px;
-    }
+<meta charset="UTF-8">
+<title>Golden Fingera | Luxury Barber – Skövde</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
-    body {
-      background: radial-gradient(circle at top, #202330 0, #050608 55%, #000 100%);
-      color: var(--text-main);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
+<style>
+* { box-sizing: border-box; }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: radial-gradient(circle at top, #1a1a1a, #000);
+  color: #fff;
+}
 
-    .wrapper {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 16px 60px;
-    }
+/* HEADER */
+header {
+  padding: 80px 20px;
+  text-align: center;
+  background: linear-gradient(to bottom, #000, #111);
+  border-bottom: 2px solid gold;
+}
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  letter-spacing: 4px;
+  color: gold;
+}
+header p {
+  margin: 10px 0;
+  color: #ccc;
+}
 
-    /* HEADER / HERO */
-    header {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
+/* SECTIONS */
+section {
+  max-width: 1000px;
+  margin: auto;
+  padding: 60px 20px;
+}
 
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 16px;
-      font-size: 14px;
-      background: linear-gradient(90deg, rgba(0,0,0,0.75), rgba(16,18,24,0.85));
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+h2 {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  color: gold;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+}
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-weight: 600;
-      font-size: 13px;
-    }
+/* CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
+}
+.card {
+  background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+  border: 1px solid gold;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(218,165,32,0.2);
+}
+.card .price {
+  margin-top: 15px;
+  font-size: 26px;
+  color: gold;
+}
 
-    .brand-icon {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      border: 1px solid rgba(212, 175, 55, 0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      color: var(--gold);
-      box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
-    }
+/* FORM */
+form {
+  max-width: 500px;
+  margin: auto;
+}
+form input, form select, form button {
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  background: #0d0d0d;
+  border: 1px solid gold;
+  color: #fff;
+  font-size: 15px;
+}
+form input::placeholder {
+  color: #777;
+}
+form button {
+  background: gold;
+  color: #000;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+form button:hover {
+  background: #ffd700;
+}
+form button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
 
-    .top-bar small {
-      color: var(--text-muted);
-      font-size: 12px;
-    }
+.notice {
+  text-align: center;
+  color: #ff5555;
+  margin-bottom: 20px;
+}
 
-    .top-bar strong {
-      color: var(--gold);
-      font-size: 13px;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.2fr);
-      gap: 32px;
-      padding: 40px 0 32px;
-      align-items: center;
-    }
-
-    .hero-left h1 {
-      font-size: clamp(32px, 4vw, 42px);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--gold);
-      margin-bottom: 10px;
-    }
-
-    .hero-left h2 {
-      font-size: clamp(22px, 3vw, 26px);
-      margin-bottom: 10px;
-    }
-
-    .hero-left p.lead {
-      color: var(--text-muted);
-      font-size: 15px;
-      max-width: 480px;
-      margin-bottom: 18px;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(5, 6, 8, 0.7);
-      border: 1px solid rgba(212, 175, 55, 0.55);
-      margin-bottom: 16px;
-      font-size: 12px;
-      color: var(--gold);
-      box-shadow: 0 0 18px rgba(212, 175, 55, 0.4);
-    }
-
-    .hero-badge span {
-      color: var(--text-main);
-      font-weight: 500;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .btn-main {
-      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
-      color: #000;
-      padding: 10px 20px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 14px;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.6);
-      transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
-    }
-
-    .btn-main:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.7);
-      filter: brightness(1.05);
-    }
-
-    .btn-ghost {
-      padding: 9px 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(5, 6, 8, 0.65);
-      font-size: 13px;
-      color: var(--text-main);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: background 0.15s ease, border 0.15s ease;
-    }
-
-    .btn-ghost:hover {
-      background: rgba(16, 18, 24, 0.85);
-      border-color: rgba(255, 255, 255, 0.25);
-    }
-
-    .hero-meta {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .hero-meta strong {
-      color: var(--gold);
-      font-weight: 500;
-    }
-
-    .hero-right {
-      position: relative;
-      min-height: 220px;
-    }
-
-    .hero-card {
-      background: radial-gradient(circle at top, #1b1f2c, #050608);
-      border-radius: 18px;
-      padding: 18px 18px 16px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow:
-        0 18px 35px rgba(0, 0, 0, 0.9),
-        0 0 40px rgba(0, 0, 0, 0.85);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top left, rgba(212, 175, 55, 0.15), transparent 55%);
-      pointer-events: none;
-    }
-
-    .hero-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .hero-card-title {
-      font-size: 14px;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-
-    .hero-card-tag {
-      font-size: 11px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.65);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      color: var(--text-muted);
-    }
-
-    .hero-card-body {
-      display: grid;
-      grid-template-columns: 1.4fr 1.1fr;
-      gap: 14px;
-      align-items: center;
-    }
-
-    .hero-slogan {
-      font-size: 13px;
-      color: var(--text-main);
-      margin-bottom: 6px;
-    }
-
-    .hero-location {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .hero-location strong {
-      color: var(--gold);
-    }
-
-    .hero-photo {
-      height: 120px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #151822, #050608);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-photo::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background-image:
-        linear-gradient(120deg, rgba(255, 255, 255, 0.06) 0, transparent 35%, transparent 65%, rgba(255, 255, 255, 0.08) 100%),
-        radial-gradient(circle at 15% 15%, rgba(212, 175, 55, 0.2), transparent 55%);
-      mix-blend-mode: screen;
-      opacity: 0.8;
-    }
-
-    .hero-offer-pill {
-      position: absolute;
-      right: 10px;
-      bottom: 10px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--accent-red), #ff4b4b);
-      color: #fff;
-      font-size: 11px;
-      font-weight: 600;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.9);
-    }
-
-    /* SECTIONS GENERIC */
-    section {
-      margin-top: 30px;
-      padding: 18px 18px 20px;
-      border-radius: var(--radius);
-      background: rgba(10, 12, 18, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.85);
-    }
-
-    section h3 {
-      font-size: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      margin-bottom: 8px;
-      color: var(--gold);
-    }
-
-    section p {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    /* SERVICES */
-    .services {
-      display: grid;
-      grid-template-columns: 1.4fr 1.1fr;
-      gap: 18px;
-      align-items: flex-start;
-    }
-
-    .price-list {
-      background: linear-gradient(135deg, #101218, #050608);
-      border-radius: 12px;
-      padding: 14px 14px 10px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .price-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 6px;
-      font-size: 14px;
-      color: var(--text-main);
-    }
-
-    .price-row span.label {
-      color: var(--text-main);
-    }
-
-    .price-row span.value {
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    .price-note {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    /* OFFER / PROMO */
-    .offer {
-      background: radial-gradient(circle at top, #3a1015, #140509);
-      border-color: rgba(255, 255, 255, 0.08);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .offer::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.08), transparent 55%);
-      opacity: 0.6;
-      pointer-events: none;
-    }
-
-    .offer-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .offer-tag {
-      display: inline-flex;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      font-size: 11px;
-      color: #ffdede;
-      margin-bottom: 8px;
-    }
-
-    .offer-main {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .offer-main span {
-      color: #ffe86f;
-    }
-
-    .offer-sub {
-      font-size: 13px;
-      color: #ffdede;
-      margin-bottom: 4px;
-    }
-
-    .offer-note {
-      font-size: 11px;
-      color: #f2c5c5;
-    }
-
-    /* CONTACT */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1.2fr;
-      gap: 18px;
-      align-items: flex-start;
-    }
-
-    .contact-block p {
-      font-size: 14px;
-      color: var(--text-main);
-      margin-bottom: 4px;
-    }
-
-    .contact-block small {
-      display: block;
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .hours {
-      font-size: 14px;
-      color: var(--text-main);
-    }
-
-    .hours-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 4px;
-    }
-
-    footer {
-      margin-top: 26px;
-      padding: 14px 4px 0;
-      font-size: 11px;
-      text-align: center;
-      color: var(--text-muted);
-    }
-
-    footer span.brand-foot {
-      color: var(--gold);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    @media (max-width: 800px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-      .hero-right {
-        order: -1;
-      }
-      .services {
-        grid-template-columns: 1fr;
-      }
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-      .top-bar {
-        flex-direction: column;
-        gap: 4px;
-        align-items: flex-start;
-      }
-    }
-  </style>
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 1px solid gold;
+  color: #aaa;
+  font-size: 14px;
+}
+</style>
 </head>
+
 <body>
-  <header>
-    <div class="top-bar">
-      <div class="brand">
-        <div class="brand-icon">GF</div>
-        <span>SALON GOLDEN FINGERS</span>
-      </div>
-      <div>
-        <small>Mariestadsvägen 86, 549 56 Skövde</small> ·
-        <strong>Tel: 072-444 41 01</strong>
-      </div>
-    </div>
-  </header>
 
-  <main class="wrapper">
-    <!-- HERO -->
-    <section class="hero-section" style="background:none; box-shadow:none; padding-top:28px;">
-      <div class="hero">
-        <div class="hero-left">
-          <div class="hero-badge">
-            NY KUND?
-            <span>Första klippning endast 99 kr</span>
-          </div>
-          <h1>SALON GOLDEN FINGERS</h1>
-          <h2>Klassisk & modern herrklippning</h2>
-          <p class="lead">
-            Noga fades, skarpa linjer och avslappnad stämning – varje gång. Herrsalong i Skövde med fokus på stil, detaljer och service.
-          </p>
-          <div class="hero-actions">
-            <a href="tel:0724444101" class="btn-main">
-              Ring oss
-              <span>072-444 41 01</span>
-            </a>
-            <a href="#kontakt" class="btn-ghost">
-              Hitta till salongen
-            </a>
-          </div>
-          <div class="hero-meta">
-            <strong>Öppet</strong> måndag–lördag · Drop-in i mån av tid.
-          </div>
-        </div>
+<header>
+  <h1>Golden Fingera</h1>
+  <p>Luxury Barber – Skövde</p>
+  <p>Owner: Omar | 14 Years Experience</p>
+</header>
 
-        <div class="hero-right">
-          <div class="hero-card">
-            <div class="hero-card-header">
-              <div class="hero-card-title">Herrsalong i Skövde</div>
-              <div class="hero-card-tag">Klippning · Skägg</div>
-            </div>
-            <div class="hero-card-body">
-              <div>
-                <div class="hero-slogan">
-                  Ren, skarp och stilren look – anpassad efter dig.
-                </div>
-                <div class="hero-location">
-                  <strong>SALON GOLDEN FINGERS</strong><br />
-                  Mariestadsvägen 86, 549 56 Skövde
-                </div>
-              </div>
-              <div class="hero-photo">
-                <div class="hero-offer-pill">
-                  Ny kund? 99 kr första klippning
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>  
-    </section>
+<section>
+  <h2>Services & Prices</h2>
+  <div class="cards">
+    <div class="card">Haircut<div class="price">250 SEK</div></div>
+    <div class="card">Beard<div class="price">250 SEK</div></div>
+    <div class="card">Kids<div class="price">250 SEK</div></div>
+  </div>
+</section>
 
-    <!-- OM SALONGEN -->
-    <section id="om">
-      <h3>Om salongen</h3>
-      <p>
-        SALON GOLDEN FINGERS är en herrsalong där du får tid, känsla av lyx och en frisyr som passar just dig.
-        Vi fokuserar på skarpa fades, tydliga linjer och en avslappnad stämning i stolen.
-      </p>
-    </section>
+<section>
+  <h2>Book Appointment</h2>
+  <p class="notice" id="notice"></p>
 
-    <!-- TJÄNSTER & PRISER -->
-    <section id="tjanster">
-      <div class="services">
-        <div>
-          <h3>Tjänster & priser</h3>
-          <p>
-            Enkelt och tydligt – samma pris för klassisk klippning och skägg. 
-            Perfekt för dig som vill hålla både hår och skägg i ordning utan krångel.
-          </p>
-        </div>
-        <div class="price-list">
-          <div class="price-row">
-            <span class="label">Herrklippning</span>
-            <span class="value">250 kr</span>
-          </div>
-          <div class="price-row">
-            <span class="label">Skägg & formning</span>
-            <span class="value">250 kr</span>
-          </div>
-          <p class="price-note">
-            Kombinera klippning och skägg för en helhetslook.
-          </p>
-        </div>
-      </div>
-    </section>
+  <form id="booking-form">
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+    <input type="email" name="email" placeholder="Email Address" required>
 
-    <!-- ERBJUDANDE NY KUND -->
-    <section class="offer">
-      <div class="offer-inner">
-        <div class="offer-tag">Fast erbjudande</div>
-        <div class="offer-main">
-          Ny kund? <span>Första klippning endast 99 kr</span>
-        </div>
-        <div class="offer-sub">
-          Gäller alla nya kunder vid första besöket. Betalas på plats i salongen.
-        </div>
-        <div class="offer-note">
-          Erbjudandet avser herrklippning och kan inte kombineras med andra rabatter.
-        </div>
-      </div>
-    </section>
+    <select name="service" required>
+      <option value="">Select Service</option>
+      <option value="Haircut">Haircut</option>
+      <option value="Beard">Beard</option>
+      <option value="Haircut & Beard">Haircut & Beard</option>
+    </select>
 
-    <!-- KONTAKT -->
-    <section id="kontakt">
-      <h3>Kontakt & öppettider</h3>
-      <div class="contact-grid">
-        <div class="contact-block">
-          <p><strong>SALON GOLDEN FINGERS</strong></p>
-          <p>Mariestadsvägen 86<br />549 56 Skövde</p>
-          <p>
-            Telefon: <a href="tel:0724444101">072-444 41 01</a>
-          </p>
-          <small>
-            Ring för frågor eller för att säkerställa plats. Drop-in i mån av tid.
-          </small>
-        </div>
-        <div class="hours">
-          <div class="hours-row">
-            <span>Måndag – fredag</span>
-            <span>10:00 – 18:00</span>
-          </div>
-          <div class="hours-row">
-            <span>Lördag</span>
-            <span>10:00 – 14:00</span>
-          </div>
-          <div class="hours-row">
-            <span>Söndag</span>
-            <span>Stängt</span>
-          </div>
-        </div>
-      </div>
-    </section>
+    <input type="date" name="date" id="date" required>
+    <select name="time" id="time" required></select>
 
-    <footer>
-      <span class="brand-foot">SALON GOLDEN FINGERS</span> · Herrsalong i Skövde · Mariestadsvägen 86 · Tel 072-444 41 01
-    </footer>
-  </main>
+    <button type="submit">Confirm Booking</button>
+  </form>
+</section>
+
+<section>
+  <h2>Contact</h2>
+  <div class="card">
+    📍 Maristasvägen 86 – Skövde<br><br>
+    📞 072-444-4101<br><br>
+    📧 omar1tftnaze@gmail.com
+  </div>
+</section>
+
+<footer>
+  © 2025 Golden Fingera – All Rights Reserved
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function(){
+  emailjs.init("RdqnDhUxmbBR69lCQ");
+})();
+
+const dateInput = document.getElementById("date");
+const timeSelect = document.getElementById("time");
+const notice = document.getElementById("notice");
+const button = document.querySelector("form button");
+
+dateInput.addEventListener("change", () => {
+  timeSelect.innerHTML = "";
+  const day = new Date(dateInput.value).getDay();
+
+  if (day === 5 || day === 6) {
+    notice.textContent = "Friday & Saturday: Walk-in only (No online booking)";
+    button.disabled = true;
+    return;
+  }
+
+  notice.textContent = "";
+  button.disabled = false;
+
+  for (let h = 10; h <= 17; h++) {
+    const opt = document.createElement("option");
+    opt.value = h + ":00";
+    opt.textContent = h + ":00";
+    timeSelect.appendChild(opt);
+  }
+});
+
+document.getElementById("booking-form").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  emailjs.sendForm(
+    "service_osd1mqu",
+    "template_erd8bqc",
+    this
+  ).then(
+    () => {
+      alert("Booking confirmed! Check your email 📧");
+      this.reset();
+    },
+    () => {
+      alert("Error sending booking ❌");
+    }
+  );
+});
+</script>
+
 </body>
 </html>
