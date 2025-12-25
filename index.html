@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Golden Fingera | Luxury Barber – Skövde</title>
+<title>GOLDEN FINGERS | Luxury Barber – Skövde</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
@@ -26,8 +26,8 @@ header {
 }
 header h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 56px;
-  letter-spacing: 5px;
+  font-size: 58px;
+  letter-spacing: 6px;
   color: #b08d2f;
 }
 header p {
@@ -57,6 +57,7 @@ h2 {
   gap: 25px;
 }
 .card {
+  position: relative;
   background: linear-gradient(145deg, #f8f8f8, #cccccc);
   border: 1px solid rgba(176,141,47,0.6);
   padding: 35px;
@@ -64,11 +65,30 @@ h2 {
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.7),
     0 15px 30px rgba(0,0,0,0.15);
+  transition: 0.3s;
+}
+.card:hover {
+  transform: translateY(-6px);
 }
 .card .price {
   margin-top: 15px;
   font-size: 28px;
   color: #b08d2f;
+}
+
+/* Tooltip */
+.card span {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Stars */
+.stars {
+  margin-top: 10px;
+  color: #d4af37;
+  font-size: 18px;
 }
 
 /* FORM */
@@ -85,9 +105,6 @@ form input, form select, form button {
   color: #222;
   font-size: 15px;
 }
-form input::placeholder {
-  color: #666;
-}
 form button {
   background: linear-gradient(145deg, #c9a24d, #b08d2f);
   color: #fff;
@@ -98,15 +115,21 @@ form button {
 form button:hover {
   background: #d4af37;
 }
-form button:disabled {
-  background: #aaa;
-  cursor: not-allowed;
-}
 
 .notice {
   text-align: center;
   color: #b00020;
   margin-bottom: 20px;
+}
+
+/* CONTACT */
+.contact a {
+  color: #222;
+  text-decoration: none;
+  font-weight: 600;
+}
+.contact a:hover {
+  color: #b08d2f;
 }
 
 /* FOOTER */
@@ -123,7 +146,7 @@ footer {
 <body>
 
 <header>
-  <h1>Golden Fingera</h1>
+  <h1>GOLDEN FINGERS</h1>
   <p>Luxury Barber – Skövde</p>
   <p>Owner: Omar | 14 Years Experience</p>
 </header>
@@ -131,9 +154,24 @@ footer {
 <section>
   <h2>Services & Prices</h2>
   <div class="cards">
-    <div class="card">Haircut<div class="price">250 SEK</div></div>
-    <div class="card">Beard<div class="price">250 SEK</div></div>
-    <div class="card">Kids<div class="price">250 SEK</div></div>
+    <div class="card">
+      Haircut
+      <div class="price">250 SEK</div>
+      <span>Choose any haircut style you like — you will be 100% satisfied.</span>
+      <div class="stars">★★★★★</div>
+    </div>
+    <div class="card">
+      Beard
+      <div class="price">250 SEK</div>
+      <span>Professional beard shaping with precision and care.</span>
+      <div class="stars">★★★★★</div>
+    </div>
+    <div class="card">
+      Kids
+      <div class="price">250 SEK</div>
+      <span>Friendly haircut experience for kids with perfect results.</span>
+      <div class="stars">★★★★★</div>
+    </div>
   </div>
 </section>
 
@@ -162,19 +200,22 @@ footer {
 
 <section>
   <h2>Contact</h2>
-  <div class="card">
-    📍 Maristasvägen 86 – Skövde<br><br>
-    📞 072-444-4101<br><br>
-    📧 omar1tftnaze@gmail.com
+  <div class="card contact">
+    📍 <a href="https://maps.google.com/?q=Maristasvägen+86+Skövde" target="_blank">
+      Maristasvägen 86 – Skövde
+    </a><br><br>
+
+    📞 <a href="tel:+46724444101">072-444-4101</a><br><br>
+
+    📧 <a href="mailto:omar1tftnaze@gmail.com">omar1tftnaze@gmail.com</a>
   </div>
 </section>
 
 <footer>
-  © 2025 Golden Fingera – All Rights Reserved
+  © 2025 GOLDEN FINGERS – All Rights Reserved
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-
 <script>
 (function(){
   emailjs.init("RdqnDhUxmbBR69lCQ");
@@ -183,7 +224,6 @@ footer {
 const dateInput = document.getElementById("date");
 const timeSelect = document.getElementById("time");
 const notice = document.getElementById("notice");
-const button = document.querySelector("form button");
 
 dateInput.addEventListener("change", () => {
   timeSelect.innerHTML = "";
@@ -191,13 +231,10 @@ dateInput.addEventListener("change", () => {
 
   if (day === 5 || day === 6) {
     notice.textContent = "Friday & Saturday: Walk-in only (No online booking)";
-    button.disabled = true;
     return;
   }
 
   notice.textContent = "";
-  button.disabled = false;
-
   for (let h = 10; h <= 17; h++) {
     const opt = document.createElement("option");
     opt.value = h + ":00";
@@ -208,19 +245,8 @@ dateInput.addEventListener("change", () => {
 
 document.getElementById("booking-form").addEventListener("submit", function(e){
   e.preventDefault();
-
-  emailjs.sendForm(
-    "service_osd1mqu",
-    "template_erd8bqc",
-    this
-  ).then(
-    () => {
-      this.reset();
-    },
-    () => {
-      alert("Error sending booking.");
-    }
-  );
+  emailjs.sendForm("service_osd1mqu","template_erd8bqc",this)
+  .then(()=>this.reset());
 });
 </script>
 
