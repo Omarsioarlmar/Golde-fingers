@@ -1,200 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-<meta charset="UTF-8">
-<title>Golden Fingera | Luxury Barber - Skövde</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Golden Fingera – Booking</title>
+</head>
+<body>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<h2>✂️ حجز موعد – Golden Fingera</h2>
+
+<form id="booking-form">
+  <label>الاسم</label><br>
+  <input type="text" name="name" required><br><br>
+
+  <label>رقم الهاتف</label><br>
+  <input type="tel" name="phone" required><br><br>
+
+  <label>البريد الإلكتروني</label><br>
+  <input type="email" name="email" required><br><br>
+
+  <label>الخدمة</label><br>
+  <select name="service" required>
+    <option value="">اختر خدمة</option>
+    <option value="Haircut">Haircut</option>
+    <option value="Beard">Beard</option>
+    <option value="Haircut & Beard">Haircut & Beard</option>
+  </select><br><br>
+
+  <label>التاريخ</label><br>
+  <input type="date" name="date" required><br><br>
+
+  <label>الوقت</label><br>
+  <input type="time" name="time" required><br><br>
+
+  <button type="submit">احجز الآن</button>
+</form>
 
 <!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
 <script>
 (function(){
-  emailjs.init("RdqnDhUxmbBR69lCQ"); // تحطه من EmailJS
+  emailjs.init("PUT_PUBLIC_KEY_HERE");
 })();
-</script>
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  background: #000;
-  color: #fff;
-}
-header {
-  padding: 30px;
-  text-align: center;
-  border-bottom: 1px solid #bfa76f;
-}
-header h1 {
-  font-family: 'Playfair Display', serif;
-  color: #d4af37;
-  letter-spacing: 2px;
-}
-section {
-  padding: 40px 20px;
-  max-width: 1000px;
-  margin: auto;
-}
-h2 {
-  color: #d4af37;
-  text-align: center;
-}
-.services, .contact {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-  gap: 20px;
-}
-.card {
-  border: 1px solid #bfa76f;
-  padding: 20px;
-  text-align: center;
-}
-.price {
-  font-size: 24px;
-  color: #d4af37;
-}
-input, select, button {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  background: #111;
-  border: 1px solid #bfa76f;
-  color: #fff;
-}
-button {
-  background: #d4af37;
-  color: #000;
-  font-weight: bold;
-  cursor: pointer;
-}
-button:disabled {
-  background: #555;
-  cursor: not-allowed;
-}
-footer {
-  text-align: center;
-  padding: 20px;
-  border-top: 1px solid #bfa76f;
-}
-.notice {
-  color: #ff5555;
-  text-align: center;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <h1>Golden Fingera</h1>
-  <p>Luxury Barber – Skövde</p>
-  <p>Owner: Omar | 14 Years Experience</p>
-</header>
-
-<section>
-  <h2>Services & Prices</h2>
-  <div class="services">
-    <div class="card">
-      <h3>Haircut</h3>
-      <p class="price">250 SEK</p>
-    </div>
-    <div class="card">
-      <h3>Beard Trim</h3>
-      <p class="price">250 SEK</p>
-    </div>
-    <div class="card">
-      <h3>Kids</h3>
-      <p class="price">250 SEK</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2>Book Appointment</h2>
-  <p class="notice" id="notice"></p>
-  <form id="bookingForm">
-    <input type="text" name="name" required>
-    <input type="tel" name="phone" required>
-    <input type="email" name="email" required>
-
-    <select id="service" required>
-      <option value="">Select Service</option>
-      <option>Haircut</option>
-      <option>Beard</option>
-      <option>Haircut & Beard</option>
-    </select>
-
-    <input type="date" id="date" required>
-    <select id="time" required></select>
-
-    <button type="submit">Confirm Booking</button>
-  </form>
-</section>
-
-<section>
-  <h2>Contact</h2>
-  <div class="contact">
-    <div class="card">
-      <p>📍 Maristasvägen 86<br>Skövde, Sweden</p>
-      <p>📞 072-444-4101</p>
-      <p>📧 omar1tftnaze@gmail.com</p>
-    </div>
-  </div>
-</section>
-
-<footer>
-  © 2025 Golden Fingera – All Rights Reserved
-</footer>
-
-<script>
-const dateInput = document.getElementById("date");
-const timeSelect = document.getElementById("time");
-const notice = document.getElementById("notice");
-
-dateInput.addEventListener("change", () => {
-  timeSelect.innerHTML = "";
-  const day = new Date(dateInput.value).getDay();
-
-  // Friday = 5, Saturday = 6
-  if (day === 5 || day === 6) {
-    notice.textContent = "No online booking on Friday & Saturday – Walk-in only.";
-    document.querySelector("button").disabled = true;
-    return;
-  }
-
-  notice.textContent = "";
-  document.querySelector("button").disabled = false;
-
-  for (let h = 10; h <= 17; h++) {
-    let option = document.createElement("option");
-    option.value = h + ":00";
-    option.textContent = h + ":00";
-    timeSelect.appendChild(option);
-  }
-});
-
-document.getElementById("bookingForm").addEventListener("submit", function(e){
+document.getElementById("booking-form").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const params = {
-    name: name.value,
-    email: email.value,
-    phone: phone.value,
-    service: service.value,
-    date: date.value,
-    time: time.value
-  };
-
-  emailjs.send("service_osd1mqu", "template_erd8bqc", params)
-    .then(() => {
-      alert("Booking confirmed! Check your email.");
-      this.reset();
-    }, () => {
-      alert("Error sending booking. Try again.");
-    });
+  emailjs.sendForm(
+    "PUT_SERVICE_ID_HERE",
+    "PUT_TEMPLATE_ID_HERE",
+    this
+  ).then(
+    function() {
+      alert("تم إرسال الحجز بنجاح ✅");
+      document.getElementById("booking-form").reset();
+    },
+    function(error) {
+      alert("خطأ في إرسال الحجز ❌");
+      console.log(error);
+    }
+  );
 });
 </script>
 
