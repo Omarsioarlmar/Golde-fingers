@@ -1,63 +1,224 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Golden Fingera – Booking</title>
+<meta charset="UTF-8">
+<title>Golden Fingera | Luxury Barber – Skövde</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: radial-gradient(circle at top, #1a1a1a, #000);
+  color: #fff;
+}
+
+/* HEADER */
+header {
+  padding: 80px 20px;
+  text-align: center;
+  background: linear-gradient(to bottom, #000, #111);
+  border-bottom: 2px solid gold;
+}
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  letter-spacing: 4px;
+  color: gold;
+}
+header p {
+  margin: 10px 0;
+  color: #ccc;
+}
+
+/* SECTIONS */
+section {
+  max-width: 1000px;
+  margin: auto;
+  padding: 60px 20px;
+}
+
+h2 {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  color: gold;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+}
+
+/* CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+  gap: 20px;
+}
+.card {
+  background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+  border: 1px solid gold;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(218,165,32,0.2);
+}
+.card .price {
+  margin-top: 15px;
+  font-size: 26px;
+  color: gold;
+}
+
+/* FORM */
+form {
+  max-width: 500px;
+  margin: auto;
+}
+form input, form select, form button {
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  background: #0d0d0d;
+  border: 1px solid gold;
+  color: #fff;
+  font-size: 15px;
+}
+form input::placeholder {
+  color: #777;
+}
+form button {
+  background: gold;
+  color: #000;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+form button:hover {
+  background: #ffd700;
+}
+form button:disabled {
+  background: #555;
+  cursor: not-allowed;
+}
+
+.notice {
+  text-align: center;
+  color: #ff5555;
+  margin-bottom: 20px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 1px solid gold;
+  color: #aaa;
+  font-size: 14px;
+}
+</style>
 </head>
+
 <body>
 
-<h2>✂️ حجز موعد – Golden Fingera</h2>
+<header>
+  <h1>Golden Fingera</h1>
+  <p>Luxury Barber – Skövde</p>
+  <p>Owner: Omar | 14 Years Experience</p>
+</header>
 
-<form id="booking-form">
-  <label>الاسم</label><br>
-  <input type="text" name="name" required><br><br>
+<section>
+  <h2>Services & Prices</h2>
+  <div class="cards">
+    <div class="card">Haircut<div class="price">250 SEK</div></div>
+    <div class="card">Beard<div class="price">250 SEK</div></div>
+    <div class="card">Kids<div class="price">250 SEK</div></div>
+  </div>
+</section>
 
-  <label>رقم الهاتف</label><br>
-  <input type="tel" name="phone" required><br><br>
+<section>
+  <h2>Book Appointment</h2>
+  <p class="notice" id="notice"></p>
 
-  <label>البريد الإلكتروني</label><br>
-  <input type="email" name="email" required><br><br>
+  <form id="booking-form">
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+    <input type="email" name="email" placeholder="Email Address" required>
 
-  <label>الخدمة</label><br>
-  <select name="service" required>
-    <option value="">اختر خدمة</option>
-    <option value="Haircut">Haircut</option>
-    <option value="Beard">Beard</option>
-    <option value="Haircut & Beard">Haircut & Beard</option>
-  </select><br><br>
+    <select name="service" required>
+      <option value="">Select Service</option>
+      <option value="Haircut">Haircut</option>
+      <option value="Beard">Beard</option>
+      <option value="Haircut & Beard">Haircut & Beard</option>
+    </select>
 
-  <label>التاريخ</label><br>
-  <input type="date" name="date" required><br><br>
+    <input type="date" name="date" id="date" required>
+    <select name="time" id="time" required></select>
 
-  <label>الوقت</label><br>
-  <input type="time" name="time" required><br><br>
+    <button type="submit">Confirm Booking</button>
+  </form>
+</section>
 
-  <button type="submit">احجز الآن</button>
-</form>
+<section>
+  <h2>Contact</h2>
+  <div class="card">
+    📍 Maristasvägen 86 – Skövde<br><br>
+    📞 072-444-4101<br><br>
+    📧 omar1tftnaze@gmail.com
+  </div>
+</section>
 
-<!-- EmailJS -->
+<footer>
+  © 2025 Golden Fingera – All Rights Reserved
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <script>
 (function(){
-  emailjs.init("PUT_PUBLIC_KEY_HERE");
+  emailjs.init("RdqnDhUxmbBR69lCQ");
 })();
 
-document.getElementById("booking-form").addEventListener("submit", function(e) {
+const dateInput = document.getElementById("date");
+const timeSelect = document.getElementById("time");
+const notice = document.getElementById("notice");
+const button = document.querySelector("form button");
+
+dateInput.addEventListener("change", () => {
+  timeSelect.innerHTML = "";
+  const day = new Date(dateInput.value).getDay();
+
+  if (day === 5 || day === 6) {
+    notice.textContent = "Friday & Saturday: Walk-in only (No online booking)";
+    button.disabled = true;
+    return;
+  }
+
+  notice.textContent = "";
+  button.disabled = false;
+
+  for (let h = 10; h <= 17; h++) {
+    const opt = document.createElement("option");
+    opt.value = h + ":00";
+    opt.textContent = h + ":00";
+    timeSelect.appendChild(opt);
+  }
+});
+
+document.getElementById("booking-form").addEventListener("submit", function(e){
   e.preventDefault();
 
   emailjs.sendForm(
-    "PUT_SERVICE_ID_HERE",
-    "PUT_TEMPLATE_ID_HERE",
+    "service_osd1mqu",
+    "template_erd8bqc",
     this
   ).then(
-    function() {
-      alert("تم إرسال الحجز بنجاح ✅");
-      document.getElementById("booking-form").reset();
+    () => {
+      alert("Booking confirmed! Check your email 📧");
+      this.reset();
     },
-    function(error) {
-      alert("خطأ في إرسال الحجز ❌");
-      console.log(error);
+    () => {
+      alert("Error sending booking ❌");
     }
   );
 });
