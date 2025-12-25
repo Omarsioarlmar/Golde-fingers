@@ -5,140 +5,129 @@
 <title>GOLDEN FINGERS | Luxury Barber – Skövde</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-* { box-sizing: border-box; }
+*{box-sizing:border-box}
 
-body {
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  background: radial-gradient(circle at top, #f2f2f2, #c9c9c9 40%, #a9a9a9 75%);
-  color: #222;
+body{
+  margin:0;
+  font-family:'Montserrat',sans-serif;
+  background:linear-gradient(135deg,#f5f5f5,#dcdcdc,#efefef);
+  color:#222;
 }
 
 /* HEADER */
-header {
-  text-align: center;
-  padding: 90px 20px;
-  background: linear-gradient(to bottom, #ffffffcc, #d6d6d6ee);
-  border-bottom: 1px solid #c9a24d;
+header{
+  text-align:center;
+  padding:90px 20px;
+  background:linear-gradient(to bottom,#ffffff,#e6e6e6);
+  border-bottom:2px solid #c9a24d;
 }
-header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 58px;
-  letter-spacing: 6px;
-  color: #b08d2f;
+header h1{
+  font-family:'Playfair Display',serif;
+  font-size:56px;
+  letter-spacing:6px;
+  color:#b08d2f;
+  margin:0;
 }
-header p {
-  margin: 10px 0;
-  color: #444;
-}
-
-/* SECTIONS */
-section {
-  max-width: 1000px;
-  margin: auto;
-  padding: 70px 20px;
+header p{
+  margin:10px 0;
+  color:#555;
 }
 
-h2 {
-  text-align: center;
-  font-family: 'Playfair Display', serif;
-  color: #b08d2f;
-  margin-bottom: 40px;
-  letter-spacing: 2px;
+/* SECTION */
+section{
+  max-width:1000px;
+  margin:auto;
+  padding:70px 20px;
+}
+h2{
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  color:#b08d2f;
+  margin-bottom:40px;
+  letter-spacing:2px;
 }
 
-/* CARDS */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-  gap: 25px;
+/* SERVICES */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
 }
-.card {
-  position: relative;
-  background: linear-gradient(145deg, #f8f8f8, #cccccc);
-  border: 1px solid rgba(176,141,47,0.6);
-  padding: 35px;
-  text-align: center;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.7),
-    0 15px 30px rgba(0,0,0,0.15);
-  transition: 0.3s;
+.card{
+  background:linear-gradient(145deg,#fafafa,#d0d0d0);
+  border:1px solid rgba(176,141,47,.6);
+  padding:35px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
+  transition:.3s;
 }
-.card:hover {
-  transform: translateY(-6px);
+.card:hover{transform:translateY(-6px)}
+.card .price{
+  font-size:28px;
+  color:#b08d2f;
+  margin:15px 0;
 }
-.card .price {
-  margin-top: 15px;
-  font-size: 28px;
-  color: #b08d2f;
+.card .desc{
+  font-size:14px;
+  color:#555;
 }
-
-/* Tooltip */
-.card span {
-  display: block;
-  margin-top: 12px;
-  font-size: 14px;
-  color: #555;
+.stars{
+  margin-top:10px;
+  color:#d4af37;
+  font-size:18px;
 }
 
-/* Stars */
-.stars {
-  margin-top: 10px;
-  color: #d4af37;
-  font-size: 18px;
+/* BOOKING */
+form{
+  max-width:520px;
+  margin:auto;
 }
+form input,form select,form button{
+  width:100%;
+  padding:15px;
+  margin:12px 0;
+  border:1px solid #b08d2f;
+  background:linear-gradient(145deg,#f7f7f7,#d9d9d9);
+  font-size:15px;
+}
+form button{
+  background:linear-gradient(145deg,#c9a24d,#b08d2f);
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+}
+form button:hover{background:#d4af37}
 
-/* FORM */
-form {
-  max-width: 520px;
-  margin: auto;
-}
-form input, form select, form button {
-  width: 100%;
-  padding: 15px;
-  margin: 12px 0;
-  background: linear-gradient(145deg, #f5f5f5, #d6d6d6);
-  border: 1px solid #b08d2f;
-  color: #222;
-  font-size: 15px;
-}
-form button {
-  background: linear-gradient(145deg, #c9a24d, #b08d2f);
-  color: #fff;
-  font-weight: bold;
-  letter-spacing: 1px;
-  cursor: pointer;
-}
-form button:hover {
-  background: #d4af37;
-}
-
-.notice {
-  text-align: center;
-  color: #b00020;
-  margin-bottom: 20px;
+.notice{
+  text-align:center;
+  color:#b00020;
+  margin-bottom:20px;
 }
 
 /* CONTACT */
-.contact a {
-  color: #222;
-  text-decoration: none;
-  font-weight: 600;
+.contact{
+  text-align:center;
 }
-.contact a:hover {
-  color: #b08d2f;
+.contact a{
+  display:block;
+  margin:10px 0;
+  color:#222;
+  text-decoration:none;
+  font-weight:600;
 }
+.contact a:hover{color:#b08d2f}
 
 /* FOOTER */
-footer {
-  text-align: center;
-  padding: 30px 20px;
-  border-top: 1px solid #c9a24d;
-  color: #555;
-  font-size: 14px;
+footer{
+  text-align:center;
+  padding:30px 20px;
+  border-top:2px solid #c9a24d;
+  color:#555;
+  font-size:14px;
 }
 </style>
 </head>
@@ -152,101 +141,97 @@ footer {
 </header>
 
 <section>
-  <h2>Services & Prices</h2>
-  <div class="cards">
-    <div class="card">
-      Haircut
-      <div class="price">250 SEK</div>
-      <span>Choose any haircut style you like — you will be 100% satisfied.</span>
-      <div class="stars">★★★★★</div>
-    </div>
-    <div class="card">
-      Beard
-      <div class="price">250 SEK</div>
-      <span>Professional beard shaping with precision and care.</span>
-      <div class="stars">★★★★★</div>
-    </div>
-    <div class="card">
-      Kids
-      <div class="price">250 SEK</div>
-      <span>Friendly haircut experience for kids with perfect results.</span>
-      <div class="stars">★★★★★</div>
-    </div>
+<h2>Services & Prices</h2>
+<div class="cards">
+  <div class="card">
+    Haircut
+    <div class="price">250 SEK</div>
+    <div class="desc">Choose any haircut style you want — you will be fully satisfied.</div>
+    <div class="stars">★★★★★</div>
   </div>
+  <div class="card">
+    Beard
+    <div class="price">250 SEK</div>
+    <div class="desc">Precision beard shaping with a clean luxury finish.</div>
+    <div class="stars">★★★★★</div>
+  </div>
+  <div class="card">
+    Kids
+    <div class="price">250 SEK</div>
+    <div class="desc">Friendly haircut experience for kids with perfect results.</div>
+    <div class="stars">★★★★★</div>
+  </div>
+</div>
 </section>
 
 <section>
-  <h2>Book Appointment</h2>
-  <p class="notice" id="notice"></p>
+<h2>Book Appointment</h2>
+<p class="notice" id="notice"></p>
 
-  <form id="booking-form">
-    <input type="text" name="name" placeholder="Full Name" required>
-    <input type="tel" name="phone" placeholder="Phone Number" required>
-    <input type="email" name="email" placeholder="Email Address" required>
+<form id="bookingForm">
+  <input type="text" name="name" placeholder="Full Name" required>
+  <input type="tel" name="phone" placeholder="Phone Number" required>
+  <input type="email" name="email" placeholder="Email Address" required>
 
-    <select name="service" required>
-      <option value="">Select Service</option>
-      <option value="Haircut">Haircut</option>
-      <option value="Beard">Beard</option>
-      <option value="Haircut & Beard">Haircut & Beard</option>
-    </select>
+  <select name="service" required>
+    <option value="">Select Service</option>
+    <option>Haircut</option>
+    <option>Beard</option>
+    <option>Haircut & Beard</option>
+  </select>
 
-    <input type="date" name="date" id="date" required>
-    <select name="time" id="time" required></select>
+  <input type="date" id="date" name="date" required>
+  <select id="time" name="time" required></select>
 
-    <button type="submit">Confirm Booking</button>
-  </form>
+  <button type="submit">Confirm Booking</button>
+</form>
 </section>
 
 <section>
-  <h2>Contact</h2>
-  <div class="card contact">
-    📍 <a href="https://maps.google.com/?q=Maristasvägen+86+Skövde" target="_blank">
-      Maristasvägen 86 – Skövde
-    </a><br><br>
+<h2>Contact</h2>
+<div class="contact">
+  📍 <a href="https://maps.google.com/?q=Maristasvägen+86+Skövde" target="_blank">
+  Maristasvägen 86 – Skövde</a>
 
-    📞 <a href="tel:+46724444101">072-444-4101</a><br><br>
+  📞 <a href="tel:+46724444101">072-444-4101</a>
 
-    📧 <a href="mailto:omar1tftnaze@gmail.com">omar1tftnaze@gmail.com</a>
-  </div>
+  📧 <a href="mailto:omar1tftnaze@gmail.com">omar1tftnaze@gmail.com</a>
+</div>
 </section>
 
 <footer>
-  © 2025 GOLDEN FINGERS – All Rights Reserved
+© 2025 GOLDEN FINGERS – All Rights Reserved
 </footer>
 
+<!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-(function(){
-  emailjs.init("RdqnDhUxmbBR69lCQ");
-})();
+emailjs.init("RdqnDhUxmbBR69lCQ");
 
-const dateInput = document.getElementById("date");
-const timeSelect = document.getElementById("time");
-const notice = document.getElementById("notice");
+const dateInput=document.getElementById("date");
+const timeSelect=document.getElementById("time");
+const notice=document.getElementById("notice");
 
-dateInput.addEventListener("change", () => {
-  timeSelect.innerHTML = "";
-  const day = new Date(dateInput.value).getDay();
-
-  if (day === 5 || day === 6) {
-    notice.textContent = "Friday & Saturday: Walk-in only (No online booking)";
+dateInput.addEventListener("change",()=>{
+  timeSelect.innerHTML="";
+  const day=new Date(dateInput.value).getDay();
+  if(day===5||day===6){
+    notice.textContent="Friday & Saturday: Walk-in only (No online booking)";
     return;
   }
-
-  notice.textContent = "";
-  for (let h = 10; h <= 17; h++) {
-    const opt = document.createElement("option");
-    opt.value = h + ":00";
-    opt.textContent = h + ":00";
-    timeSelect.appendChild(opt);
+  notice.textContent="";
+  for(let h=10;h<=17;h++){
+    let o=document.createElement("option");
+    o.value=h+":00";
+    o.textContent=h+":00";
+    timeSelect.appendChild(o);
   }
 });
 
-document.getElementById("booking-form").addEventListener("submit", function(e){
+document.getElementById("bookingForm").addEventListener("submit",function(e){
   e.preventDefault();
   emailjs.sendForm("service_osd1mqu","template_erd8bqc",this)
-  .then(()=>this.reset());
+  .then(()=>{alert("Booking confirmed");this.reset();});
 });
 </script>
 
